@@ -1,21 +1,19 @@
-{ config, pkgs, ... }:
+{ pkgs,  ... }@inputs:
 
 {
   home.username = "mytyl";
   home.homeDirectory = "/home/mytyl";
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  # ref: https://github.com/hyprwm/Hyprland/blob/38d77338d6bf08dca1df98e3cc12daa72c5673eb/example/hyprland-hm.nix
+  imports = [ inputs.nvf.homeManagerModules.default];
   wayland.windowManager.hyprland = import ./home/hyprland.nix;
+
+  programs.nvf = import ./home/nvf.nix;
 
 
   programs.rofi = {
     enable = true;
     theme = "material";
-
-    # plugins = with pkgs; [
-    #   rofi-calc
-    # ];
   };
 
 
@@ -78,6 +76,9 @@
     fzf
     lf
     home-manager
+    ripgrep
+    gcc
+    gnumake
 
     # dev
     docker
@@ -91,22 +92,12 @@
     brightnessctl
     playerctl
 
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # nvim 
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+
+
+    pkgs.nerd-fonts.jetbrains-mono
   ];
 
   # TODO: impl

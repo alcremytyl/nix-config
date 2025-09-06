@@ -1,3 +1,4 @@
+# https://github.com/hyprwm/Hyprland/blob/38d77338d6bf08dca1df98e3cc12daa72c5673eb/example/hyprland-hm.nix
 {
     enable = true;
     settings = {

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@inputs:
 
 {
   imports = [
@@ -74,7 +74,7 @@
 
   environment.systemPackages = with pkgs; [
     vim 
-    neovim
+    # neovim
     git
     wget
     kitty
