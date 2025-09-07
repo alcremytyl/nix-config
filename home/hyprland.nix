@@ -20,6 +20,8 @@
 	"$mod, SPACE, exec, $terminal"
 	"$mod, RETURN, exec, $menu"
 	"$mod, E, exec, $file_manager"
+        "$mod, S, exec, hyprshot -m region"
+        "$mod SHIFT, S, exec, hyprshot -m output"
 
 	"$mod, W, killactive,"
       	"$mod, V, togglefloating,"

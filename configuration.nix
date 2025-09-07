@@ -62,14 +62,18 @@
     variant = "";
   };
 
+  virtualisation.docker.enable = true;
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mytyl = {
     isNormalUser = true;
     description = "Mytyl Kamizono";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
+
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
 
   environment.systemPackages = with pkgs; [

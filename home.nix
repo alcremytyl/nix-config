@@ -5,9 +5,9 @@
   home.homeDirectory = "/home/mytyl";
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  imports = [ inputs.nvf.homeManagerModules.default];
   wayland.windowManager.hyprland = import ./home/hyprland.nix;
 
+  imports = [ inputs.nvf.homeManagerModules.default];
   programs.nvf = import ./home/nvf.nix;
 
 
@@ -22,6 +22,8 @@
     interactiveShellInit = ''
       set fish_greeting
       starship init fish | source
+      ssh-add -l
+      eval (ssh-agent -c)
     '';
     functions.fish_command_not_found = ''
       echo "fish: Unknown command: $argv[1]"
@@ -39,6 +41,7 @@
     enable = true;
     settings = {
       shell = "fish";
+      font= "JetBrainsMono Nerd Font";
       background_blur = 1;
       background_opacity = 0.7;
       enable_audio_bell = false;
@@ -82,6 +85,7 @@
 
     # dev
     docker
+    devcontainer
 
     # apps
     floorp
@@ -91,19 +95,18 @@
     wl-clipboard
     brightnessctl
     playerctl
+    hyprshot
 
 
     # nvim 
 
 
 
-    pkgs.nerd-fonts.jetbrains-mono
+    # pkgs.nerd-fonts.jetbrains-mono
   ];
 
-  # TODO: impl
-  # fonts.packages = with pkgs; [ 
-  #   nerd-fonts.jetbrains-mono
-  # ];
+  # fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
