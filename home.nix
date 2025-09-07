@@ -17,18 +17,7 @@
   };
 
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-      starship init fish | source
-      ssh-add -l
-      eval (ssh-agent -c)
-    '';
-    functions.fish_command_not_found = ''
-      echo "fish: Unknown command: $argv[1]"
-    '';
-  };
+  programs.fish = import ./home/fish.nix;
 
   programs.waybar = {
     enable = true;

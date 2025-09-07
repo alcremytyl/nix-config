@@ -30,6 +30,8 @@ in {
       (bindgen "<leader>q" ":q<CR>" "Quit file"{})
       (bindgen "<leader>w" ":w<CR>" "Save file"{})
       (bindgen "<leader>wq" ":wq<CR>" "Save and quit"{})
+      (bindgen "<leader>ch" ":Cheatsheet<CR>" "Cheatsheet"{}) # TODO: migrate to NvChad's 
+
     ];
 
     autocomplete.nvim-cmp.enable = true;
@@ -40,8 +42,11 @@ in {
     formatter.conform-nvim.enable = true;
     git.gitsigns.enable = true;
     lsp.enable = true;
+    lsp.trouble.enable = true;
+    notes.todo-comments.enable = true;
     statusline.lualine.enable = true;
     telescope.enable = true;
+    terminal.toggleterm.enable = true;
     ui.colorizer.enable = true;
     ui.nvim-ufo.enable = true;
     utility.surround.enable = true;
