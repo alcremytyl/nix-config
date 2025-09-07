@@ -1,4 +1,4 @@
-key: action: description: {
+key: action: desc: {
   mode ? ["n"],
   silent ? true
-}: { inherit key action description mode silent; }
+}: { inherit key action desc mode silent; }

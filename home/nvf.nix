@@ -1,36 +1,50 @@
 # https://notashelf.github.io/nvf/index.xhtml
 let 
-  bindgen = import ./lib/nvim-bindgen.nix;
+  bindgen = import ../lib/nvim-bindgen.nix;
 in {
   enable = true;
 
   settings.vim = {
-      theme = {
-        enable = true;
-        name = "tokyonight";
-        style = "night";
-      };
+    options.tabstop = 2;
+    options.shiftwidth = 2;
+    options.expandtab = true;
 
-      languages = {
-        enableLSP = true;
-        enableTreesitter = true;
+    theme = {
+      enable = true;
+      name = "tokyonight";
+      style = "night";
+      transparent = true;
+    };
 
-        nix.enable = true;
-        rust.enable = true;
-      };
+    languages = {
+      enableTreesitter = true;
 
-      keymaps = [
-        (bindgen "<leader>gc" ":Telescope git_commits" "Telescope git commits"{})
-                        # { key = "<leader>wq"; mode = ["n"]; action = ":wq<CR>"; silent = true; description = "Save and quit file"; }
-                        # { key = "<leader>w"; mode = ["n"]; action = ":w<CR>"; silent = true; description = "Save file"; }
-                        # { key = "<leader>q"; mode = ["n"]; action = ":q<CR>"; silent = true; description = "Quit file"; }
-      ];
+      nix.enable = true;
+      rust.enable = true;
+    };
 
-      autocomplete.nvim-cmp.enable = true;
-      clipboard.enable = true;
-      statusline.lualine.enable = true;
-      telescope.enable = true;
-      ui.nvim-ufo.enable = true;
-      utility.surround.enable = true;
+    keymaps = [
+      (bindgen "<leader>gc" ":Telescope git_commits<CR>" "Telescope git commits"{})
+      (bindgen "<leader>gs" ":Telescope git_stash<CR>" "Telescope git stash"{})
+      (bindgen "<leader>gS" ":Telescope git_status<CR>" "Telescope git status"{})
+      (bindgen "<leader>q" ":q<CR>" "Quit file"{})
+      (bindgen "<leader>w" ":w<CR>" "Save file"{})
+      (bindgen "<leader>wq" ":wq<CR>" "Save and quit"{})
+    ];
+
+    autocomplete.nvim-cmp.enable = true;
+    autopairs.nvim-autopairs.enable = true;
+    binds.cheatsheet.enable = true;
+    binds.whichKey.enable = true;
+    clipboard.enable = true;
+    formatter.conform-nvim.enable = true;
+    git.gitsigns.enable = true;
+    lsp.enable = true;
+    statusline.lualine.enable = true;
+    telescope.enable = true;
+    ui.colorizer.enable = true;
+    ui.nvim-ufo.enable = true;
+    utility.surround.enable = true;
+    visuals.indent-blankline.enable = true;
   };
 }
