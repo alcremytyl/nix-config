@@ -5,9 +5,13 @@ in {
   enable = true;
 
   settings.vim = {
-    options.tabstop = 2;
-    options.shiftwidth = 2;
-    options.expandtab = true;
+    options = {
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+      foldmethod = "manual";
+      foldlevel = 99;
+    };
 
     theme = {
       enable = true;

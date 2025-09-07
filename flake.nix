@@ -11,12 +11,6 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # nixvim = {
-    #   url = "github:nix-community/nixvim";
-    #   inputs.pkgs.follows = "nixpkgs";
-    # };
-
   };
 
   outputs = { self, nixpkgs, home-manager, nvf, ... }:  let
@@ -30,26 +24,20 @@
     nixosConfigurations."mytyl" = nixpkgs.lib.nixosSystem {
       inherit system;
 
-#      packages."x86_64-linux".default = 
-#        (nvf.lib.neovimConfiguration {
-#	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
-#	  modules = [ "./home/nvf.nix" ];
-#	}).neovim;
-
       modules = [
         ./configuration.nix
         ./hardware-configuration.nix
 
-	nvf.nixosModules.default
+	      nvf.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {
-	  nixpkgs.config.allowUnfree = true;
-	  home-manager.backupFileExtension = "backup";
-	  home-manager.useUserPackages = true;
+          nixpkgs.config.allowUnfree = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.users.mytyl = import ./home.nix { inherit pkgs; inherit nvf; };
-	}
+        }
       ];
     };
   };
