@@ -26,7 +26,7 @@
     }];
   };
 
-  programs.kitty = ./import/kitty.nix;
+  programs.kitty = import ./import/kitty.nix;
 
   programs.zoxide = {
     enable = true;

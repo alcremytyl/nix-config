@@ -11,8 +11,6 @@
     tab_bar_style = "powerline";
     tab_powerline_style = "slanted";
     titlebar_color = "background";
-
   };
-
 }
 
