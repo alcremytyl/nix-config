@@ -17,14 +17,11 @@
     settings = rec {
       initial_session = {
         command = "Hyprland";
-	user = "mytyl";
+        user = "mytyl";
       };
       default_session = initial_session;
     };
   };
-  services.greenclip.enable = false;
-
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -57,12 +54,17 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
 
   virtualisation.docker.enable = true;
+  # TODO: enable when needed
+  # services.mysql = {
+  #   enable = true;
+  #   package = pkgs.mariadb;
+  # };
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
