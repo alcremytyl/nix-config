@@ -14,11 +14,6 @@
     # TODO: investigate `binde`
     # https://wiki.hypr.land/Configuring/Binds/
     bind = [
-      "$mod, left, movefocus, l"
-      "$mod, right, movefocus, r"
-      "$mod, up, movefocus, u"
-      "$mod, down, movefocus, d"
-
       "$mod, SPACE, exec, $terminal"
       "$mod, RETURN, exec, $menu"
       "$mod, E, exec, $file_manager"
@@ -28,6 +23,16 @@
       "$mod, W, killactive,"
       "$mod, V, togglefloating,"
       "$mod, F, fullscreen"
+
+      "$mod, left,  movefocus, l"
+      "$mod, right, movefocus, r"
+      "$mod, up,    movefocus, u"
+      "$mod, down,  movefocus, d"
+
+      "$mod CTRL, left,  swapwindow, l"
+      "$mod CTRL, right, swapwindow, r"
+      "$mod CTRL, up,    swapwindow, u"
+      "$mod CTRL, down,  swapwindow, d"
 
       "$mod, 1, workspace, 1"
       "$mod, 2, workspace, 2"
@@ -39,6 +44,7 @@
       "$mod, 8, workspace, 8"
       "$mod, 9, workspace, 9"
       "$mod, 0, workspace, 10"
+
       "$mod SHIFT, 1, movetoworkspace, 1"
       "$mod SHIFT, 2, movetoworkspace, 2"
       "$mod SHIFT, 3, movetoworkspace, 3"
