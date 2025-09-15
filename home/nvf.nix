@@ -22,18 +22,19 @@ in
       transparent = true;
     };
 
-    # languages = {
-    #   enableTreesitter = true;
+    languages = {
+      enableTreesitter = true;
 
-    #   bash.enable = true;
-    #   # fish.enable = true;
-    #   html.enable = true;
-    #   jsonc.enable = true;
-    #   markdown.enable = true;
-    #   nix.enable = true;
-    #   python.enable = true;
-    #   rust.enable = true;
-    # };
+      bash.enable = true;
+      # fish.enable = true;
+      html.enable = true;
+      # jsonc.enable = true;
+      markdown.enable = true;
+      nix.enable = true;
+      python.enable = true;
+      rust.enable = true;
+      ts.enable = true;
+    };
 
     keymaps = [
       # TODO: implement some of these
@@ -95,8 +96,21 @@ in
       context.enable = true;
       grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
     };
+    telescope = {
+      enable = true;
+      setupOpts.defaults.file_ignore_patterns = [
+        "node_modules"
+        "%.git/"
+        "dist/"
+        "build/"
+        "target/"
+        "result/"
+        "_site/"
+      ];
+    };
 
-    autocomplete.nvim-cmp.enable = true;
+    diagnostics.enable = true;
+    autocomplete.blink-cmp.enable = true;
     autopairs.nvim-autopairs.enable = true;
     binds.cheatsheet.enable = true;
     binds.whichKey.enable = true;
@@ -108,7 +122,6 @@ in
     lsp.trouble.enable = true;
     notes.todo-comments.enable = true;
     statusline.lualine.enable = true;
-    telescope.enable = true;
     terminal.toggleterm.enable = true;
     ui.colorizer.enable = true;
     ui.nvim-ufo.enable = true;
