@@ -22,6 +22,13 @@
 
 
   programs.waybar = import ./home/waybar/default.nix;
+  # programs.waybar = {
+  #   enable = true;
+  #   settings = [{
+  #     modules-right = ["clock" "battery"]; 
+  #   }];
+  # };
+
 
   programs.zoxide = {
     enable = true;

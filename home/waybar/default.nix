@@ -3,10 +3,14 @@
   settings = [
     {
       modules-left = ["hyprland/workspaces"];
-      modules-middle = ["wayland/window"];
+      modules-center = ["wayland/window"];
       modules-right = ["clock" "battery"]; 
+
+      position = "top";
 
     }
   ];
+
+  style = builtins.readFile ./river_style.css;
 }
 
