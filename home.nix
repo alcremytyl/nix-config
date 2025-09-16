@@ -62,8 +62,9 @@
 
     # so professors don't get angry
     vscode
-    mariadb
-    harlequin # if not enjoyed use dbeaver-bin
+    # mariadb
+    # harlequin # if not enjoyed use dbeaver-bin
+    python312
 
 
     # apps

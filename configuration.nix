@@ -60,11 +60,11 @@
   # };
 
   virtualisation.docker.enable = true;
-  # TODO: enable when needed
-  # services.mysql = {
-  #   enable = true;
-  #   package = pkgs.mariadb;
-  # };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
