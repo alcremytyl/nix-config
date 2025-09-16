@@ -85,17 +85,13 @@ in
       };
     };
 
-    # TODO: 
-    # lazy.plugins.nvim-dev-container = {
-    #   
-    # };
-    
     treesitter = {
       enable = true;
       fold = true;
       context.enable = true;
       grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
     };
+
     telescope = {
       enable = true;
       setupOpts.defaults.file_ignore_patterns = [
@@ -109,12 +105,12 @@ in
       ];
     };
 
-    diagnostics.enable = true;
     autocomplete.blink-cmp.enable = true;
     autopairs.nvim-autopairs.enable = true;
     binds.cheatsheet.enable = true;
     binds.whichKey.enable = true;
     clipboard.enable = true;
+    diagnostics.enable = true;
     formatter.conform-nvim.enable = true;
     git.gitsigns.enable = true;
     lazy.enable = true;
