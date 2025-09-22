@@ -22,6 +22,18 @@
 
 
   programs.waybar = import ./home/waybar/default.nix;
+  programs.lf.enable = true;# = import ./home/lf.nix{inherit pkgs;}; 
+  # TODO: MAKE THAT HOE BE TREATED AS A RAW STRING
+  programs.lf.previewer.source = pkgs.writeShellScript "lf-pv.sh" ''
+    #!/usr/bin/env bash
+    case "$1" in
+      *.tar*) tar tf "$1";;
+      *.jpg|*.jpeg|*.png|*.gif|*.webp) 
+        kitty +kitten icat --clear --transfer-mode=file --stdin no --place "$${2}x$${3}@$${4}x$${5}" "$${1}";;
+      *) highlight -O ansi $1 || cat "$1";;
+    esac
+  '';
+
   # programs.waybar = {
   #   enable = true;
   #   settings = [{
@@ -50,9 +62,13 @@
     starship
     btop
     fzf
-    lf
     home-manager
     ripgrep
+
+    highlight
+    unzip
+    unrar
+
 
     # dev
     docker

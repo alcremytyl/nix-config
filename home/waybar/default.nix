@@ -9,6 +9,6 @@
 
   }];
 
-  style = builtins.readFile ./river_style.css;
+  style = builtins.readFile ./ellfouts.css;
 }
 
