@@ -29,7 +29,7 @@
     case "$1" in
       *.tar*) tar tf "$1";;
       *.jpg|*.jpeg|*.png|*.gif|*.webp) 
-        kitty +kitten icat --clear --transfer-mode=file --stdin no --place "$${2}x$${3}@$${4}x$${5}" "$${1}";;
+        kitty +kitten icat --clear --transfer-mode=file --stdin no --place "''${2}x''${3}@''${4}x''${5}" "$1";;
       *) highlight -O ansi $1 || cat "$1";;
     esac
   '';
@@ -78,7 +78,8 @@
 
     # so professors don't get angry
     vscode
-    # mariadb
+    mariadb
+    dbeaver-bin
     # harlequin # if not enjoyed use dbeaver-bin
     python312
 
