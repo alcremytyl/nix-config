@@ -1,6 +1,6 @@
 # https://notashelf.github.io/nvf/index.xhtml
 let 
-  bindgen = import ./nvim-bindgen.nix;
+  bindgen = import ./keybind-gen.nix;
   pkgs = import <nixpkgs> {};
 in 
   {
