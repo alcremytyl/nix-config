@@ -113,6 +113,9 @@ in
         owner = "esensar";
         hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
       }
+      # TODO: add
+      # https://github.com/mikavilpas/yazi.nvim
+
       # TODO: make this one work
       {
         name = "render-markdown.nvim";

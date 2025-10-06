@@ -11,7 +11,6 @@
       "waybar"
     ];
 
-    # TODO: investigate `binde`
     # https://wiki.hypr.land/Configuring/Binds/
     bind = [
       "$mod, SPACE, exec, $terminal"

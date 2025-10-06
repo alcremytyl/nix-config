@@ -22,7 +22,6 @@ in {
   };
 
 
-  # TODO: hyprpaper with rotating wallpapers
   services.hyprpaper = {
     enable = true;
     settings = {
