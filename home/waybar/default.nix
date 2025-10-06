@@ -4,7 +4,7 @@
     reload_on_style_change = true;
     position = "top";
 
-    modules-left = ["clock" "backlight/slider" "tray"];
+    modules-left = ["clock" "tray"];
     modules-center = ["hyprland/workspaces"];
     modules-right = ["group/expand" "network" "battery" "pulseaudio"]; 
 
@@ -67,7 +67,7 @@
     pulseaudio = {
       format = "{icon} {volume}%";
       format-bluetooth = "󰂰 {volume}%";
-      format-muted = " {volume}%";
+      format-muted = "  {volume}%";
       format-icons = [ " " " " " "];
       on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       on-scroll-up = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-";
@@ -75,6 +75,6 @@
     };
   }];
 
-  style = builtins.readFile ./themes/catpuccin-macchiato.css;
+  style = builtins.readFile ./themes/ellfouts.css;
 }
 

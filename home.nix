@@ -1,6 +1,7 @@
 { pkgs,  ... }@inputs:
-
-{
+let
+  wallpaper = "/etc/nixos/assets/wallpaper.png";
+in {
   home.username = "mytyl";
   home.homeDirectory = "/home/mytyl";
   home.stateVersion = "25.05"; # Please read the comment before changing.
@@ -11,7 +12,8 @@
   wayland.windowManager.hyprland = import ./home/hyprland.nix;
   programs.fish = import ./home/fish.nix;
   programs.kitty = import ./home/kitty.nix;
-  programs.nvf = import ./home/nvf.nix;
+  programs.nvf = import ./home/nvf/default.nix{inherit pkgs;};
+  programs.waybar = import ./home/waybar/default.nix;
 
 
   programs.rofi = {
@@ -20,27 +22,14 @@
   };
 
 
-
-  programs.waybar = import ./home/waybar/default.nix;
-  programs.lf.enable = true;# = import ./home/lf.nix{inherit pkgs;}; 
-  # TODO: MAKE THAT HOE BE TREATED AS A RAW STRING
-  programs.lf.previewer.source = pkgs.writeShellScript "lf-pv.sh" ''
-    #!/usr/bin/env bash
-    case "$1" in
-      *.tar*) tar tf "$1";;
-      *.jpg|*.jpeg|*.png|*.gif|*.webp) 
-        kitty +kitten icat --clear --transfer-mode=file --stdin no --place "''${2}x''${3}@''${4}x''${5}" "$1";;
-      *) highlight -O ansi $1 || cat "$1";;
-    esac
-  '';
-
-  # programs.waybar = {
-  #   enable = true;
-  #   settings = [{
-  #     modules-right = ["clock" "battery"]; 
-  #   }];
-  # };
-
+  # TODO: hyprpaper with rotating wallpapers
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ wallpaper ];
+      wallpaper = [ "eDP-1,${wallpaper}" ];
+    };
+  };
 
   programs.zoxide = {
     enable = true;
@@ -59,40 +48,42 @@
     libnotify
 
     # cli
-    starship
     btop
     fzf
+    highlight
     home-manager
     ripgrep
-
-    highlight
-    unzip
+    starship
     unrar
+    unzip
+    yazi
 
 
     # dev
-    docker
     devcontainer
+    docker
     gcc
     gnumake
+    python312
 
     # so professors don't get angry
-    vscode
-    mariadb
     dbeaver-bin
-    # harlequin # if not enjoyed use dbeaver-bin
-    python312
+    mariadb
+    vscode
 
 
     # apps
-    floorp
     discord
+    floorp
+
 
     # deps
-    wl-clipboard
     brightnessctl
-    playerctl
+    hellwal
     hyprshot
+    hyprpaper
+    playerctl
+    wl-clipboard
   ];
 
 

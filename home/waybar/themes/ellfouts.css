@@ -1,10 +1,14 @@
-/* https://github.com/danihek/hellwal */
-/* @import url('../../.cache/wal/colors-waybar.css'); */
+/* TODO: 
+ * get hellwal imports working 
+ * https://github.com/danihek/hellwal 
+ */
 
 * {
     font-size:15px;
     font-family: "JetBrains Mono Nerd Font";
+    margin: 0px 2px;
 }
+
 window#waybar{
     all:unset;
 }
@@ -12,25 +16,25 @@ window#waybar{
     padding:7px;
     margin:10px 0px 5px 10px;
     border-radius:10px;
-    background: alpha(@background,.6);
+    background: alpha(#181926,.6);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 .modules-center {
     padding:7px;
     margin:10px 0px 5px 0px;
     border-radius:10px;
-    background: alpha(@background,.6);
+    background: alpha(#181926,.6);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 .modules-right {
     padding:7px;
     margin: 10px 10px 5px 0px;
     border-radius:10px;
-    background: alpha(@background,.6);
+    background: alpha(#181926,.6);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 tooltip {
-    background:@background;
+    background:#181926;
     color: @color7;
 }
 #clock:hover, #custom-pacman:hover, #custom-notification:hover,#bluetooth:hover,#network:hover,#battery:hover, #cpu:hover,#memory:hover,#temperature:hover{

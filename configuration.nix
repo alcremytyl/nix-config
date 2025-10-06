@@ -22,6 +22,7 @@
       default_session = initial_session;
     };
   };
+  services.openssh.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -29,6 +30,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.firewall.allowedTCPPorts = [ 3306 ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
 
@@ -64,6 +66,13 @@
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
+    dataDir = "/var/lib/mariadb/data";
+    settings.mysqld = {
+      bind-address = "0.0.0.0";
+      port = 3306;
+      skip-networking = false;
+
+    };
   };
 
 
@@ -71,7 +80,7 @@
   users.users.mytyl = {
     isNormalUser = true;
     description = "Mytyl Kamizono";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "mysql" ];
     packages = with pkgs; [];
   };
 

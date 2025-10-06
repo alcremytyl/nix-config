@@ -60,7 +60,7 @@
     binde = [
       "$mod ALT, LEFT, resizeactive, -50 0"
       "$mod ALT, RIGHT, resizeactive, 50 0"
-      "$mod ALT, UP, resizeactive, 0 50"
+      "$mod ALT, UP, resizeactive, 0 -50"
       "$mod ALT, DOWN, resizeactive, 0 50"
     ];
 
@@ -79,6 +79,11 @@
       ", XF86AudioPause, exec, playerctl play-pause"
       ", XF86AudioPlay,  exec, playerctl play-pause"
       ", XF86AudioPrev,  exec, playerctl previous"
+    ];
+
+    bindm = [
+      "$mod, mouse:272, movewindow"
+      "$mod, mouse:273, resizewindow"
     ];
 
     env = [

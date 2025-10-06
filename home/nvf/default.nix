@@ -22,21 +22,23 @@ let
         name = plugin.name;
         pname = plugin.pname or name;
         repo = plugin.repo or name;
+        branch = plugin.branch or "main";
+        hash = plugin.hash or "";
         lazy_val = if builtins.hasAttr "lazy" plugin then plugin.lazy else true;
       in {
         name = name;
         value = {
           package = pkgs.vimUtils.buildVimPlugin {
             pname = pname;
-            version = plugin.branch;
+            version = branch;
             src = pkgs.fetchFromGitHub {
               owner = plugin.owner;
               repo = repo;
-              rev = plugin.branch;
-              hash = plugin.hash;
+              rev = branch;
+              hash = hash;
             };
           };
-          setupModule = plugin.setupModule or name;
+          setupModule = plugin.setupModule or pname;
           lazy = lazy_val;
         };
       }
@@ -109,47 +111,15 @@ in
       {
         name = "devcontainer";
         owner = "esensar";
-        branch = "main";
         hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
       }
-
-        # "netrw.nvim" = {
-        #   package = pkgs.vimUtils.buildVimPlugin {
-        #     pname = "netrw.nvim";
-        #     version = "master";
-        #     src = pkgs.fetchFromGitHub {
-        #       owner = "prichrd";
-        #       repo = "netrw.nvim";
-        #       rev = "master";
-        #       hash = "sha256-tEO+omzlaC0uFkIHebeqnGtiPbDelRTBJONEnTy0F9U=";
-        #     };
-        #   };
-        #   setupModule = "netrw";
-        #   lazy = false;
-        # };
-        # "devcontainer" = {
-        #   package = pkgs.vimUtils.buildVimPlugin {
-        #     pname = "devcontainer";
-        #     version = "main";
-        #     src = pkgs.fetchFromGitHub {
-        #       owner = "esensar";
-        #       repo = "nvim-dev-container";
-        #       rev = "main";
-        #       hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
-        #     };
-        #   };
-        #   setupModule = "devcontainer";
-      # "render-markdown.nvim" = {
-      #   package = pkgs.vimUtils.buildVimPlugin {
-      #     pname = "render-markdown";
-      #     version = "main";
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "MeanderingProgrammer";
-      #       repo = "render-markdown.nvim";
-      #       rev = "main";
-      #     };
-      #   };
-      # };
+      # TODO: make this one work
+      {
+        name = "render-markdown.nvim";
+        owner = "MeanderingProgrammer";
+        hash = "sha256-Smt9v6/XyHUdUiIPyCPQSRvWCeMMhYITSZWd9M7Jlvs=";
+        setupModule = "render-markdown";
+      }
     ];
 
     treesitter = {
