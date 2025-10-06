@@ -79,7 +79,6 @@ in {
 
     # deps
     brightnessctl
-    hellwal
     hyprshot
     hyprpaper
     playerctl
