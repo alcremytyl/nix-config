@@ -1,33 +1,30 @@
 { pkgs }:
 
-let
-  buildPlugin = {
-    name,
-    pname ? name,
-    version ? "main",
-    owner,
-    repo ? pname,
-    rev ? version,
-    hash ? "",
-    setupModule ? null,
-    lazy ? null,
-  }: {
-    package = pkgs.vimUtils.buildVimPlugin {
-      inherit pname version;
-      src = pkgs.fetchFromGitHub {
-        inherit owner repo rev hash;
-      };
-    };
-  # TODO: check if this is even needed
-  } // (if setupModule != null then { inherit setupModule; } else {})
-    // (if lazy != null then { inherit lazy; } else {});
-in
-
-{
-  buildPlugins = (plugins:
-    builtins.listToAttrs (map (plugin: {
+plugins: builtins.listToAttrs (
+  builtins.map (plugin:
+    let
       name = plugin.name;
-      value = buildPlugin plugin;
-    }) plugins));
-}
-
+      pname = plugin.pname or name;
+      repo = plugin.repo or name;
+      branch = plugin.branch or "main";
+      hash = plugin.hash or "";
+      lazy_val = if builtins.hasAttr "lazy" plugin then plugin.lazy else true;
+    in {
+      name = name;
+      value = {
+        package = pkgs.vimUtils.buildVimPlugin {
+          pname = pname;
+          version = branch;
+          src = pkgs.fetchFromGitHub {
+            owner = plugin.owner;
+            repo = repo;
+            rev = branch;
+            hash = hash;
+          };
+        };
+        setupModule = plugin.setupModule or pname;
+        lazy = lazy_val;
+      };
+    }
+  ) plugins
+)

@@ -2,6 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+# TODO: move allat home manager stuff to ~/.config/home
+
 { config, pkgs, ... }@inputs:
 
 {

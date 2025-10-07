@@ -1,50 +1,8 @@
 # https://notashelf.github.io/nvf/index.xhtml
 {pkgs}:
 let 
-  # pkgs = import <nixpkgs> {};
-  bindgen = builtins.map (args:
-    let
-      key    = builtins.elemAt args 0;
-      action = builtins.elemAt args 1;
-      desc   = builtins.elemAt args 2;
-      extras = builtins.elemAt args 3 // {};
-      mode   = extras.mode or ["n"];
-      silent = if builtins.hasAttr "silent" extras then extras.silent else true;
-    in
-      { inherit key action desc mode silent; } // (builtins.removeAttrs extras ["mode" "silent"])
-  );
-
-
-  # lazy = import ./lazy-gen.nix{inherit pkgs;};
-  lazygen = plugins: builtins.listToAttrs (
-    builtins.map (plugin:
-      let
-        name = plugin.name;
-        pname = plugin.pname or name;
-        repo = plugin.repo or name;
-        branch = plugin.branch or "main";
-        hash = plugin.hash or "";
-        lazy_val = if builtins.hasAttr "lazy" plugin then plugin.lazy else true;
-      in {
-        name = name;
-        value = {
-          package = pkgs.vimUtils.buildVimPlugin {
-            pname = pname;
-            version = branch;
-            src = pkgs.fetchFromGitHub {
-              owner = plugin.owner;
-              repo = repo;
-              rev = branch;
-              hash = hash;
-            };
-          };
-          setupModule = plugin.setupModule or pname;
-          lazy = lazy_val;
-        };
-      }
-    ) plugins
-  );
-
+  bindgen = import ./keybind-gen.nix;
+  lazygen = import ./lazy-gen.nix{inherit pkgs;};
 in 
   {
   enable = true;
