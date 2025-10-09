@@ -1,8 +1,9 @@
 # https://notashelf.github.io/nvf/index.xhtml
-{pkgs}:
+{ pkgs }:
 let 
   bindgen = import ./keybind-gen.nix;
   lazygen = import ./lazy-gen.nix{inherit pkgs;};
+  inherit (pkgs.lib.nvim.binds) mkKeymap ;
 in 
   {
   enable = true;
@@ -27,16 +28,22 @@ in
       enableTreesitter = true;
 
       bash.enable = true;
-      # fish.enable = true;
       html.enable = true;
-      # jsonc.enable = true;
       java.enable = true;
       markdown.enable = true;
+      markdown.extensions.render-markdown-nvim.enable = true;
       nix.enable = true;
       python.enable = true;
       rust.enable = true;
       ts.enable = true;
     };
+
+    # TODO: change this to use mkKeymap
+    # https://notashelf.github.io/nvf/index.xhtml#sec-custom-key-mappings
+
+    # keymaps = builtins.map () [
+
+    # ];
 
     keymaps = bindgen[
       # TODO: implement some of these
@@ -47,6 +54,8 @@ in
       [ "<leader>gs" ":Telescope git_stash<CR>"   "Telescope git stash"{} ]
       [ "<leader>gS" ":Telescope git_status<CR>"  "Telescope git status"{} ]
       [ "<leader>gT" ":TodoTelescope<CR>"  "Telescope todo list"{} ]
+
+      [ "<leader>fd" ":Yazi<CR>" "Yazi open"{} ]
 
       [ "<leader>q"  ":q<CR>"  "Quit file"{} ]
       [ "<leader>w"  ":w<CR>"  "Save file"{} ]
@@ -71,16 +80,6 @@ in
         owner = "esensar";
         hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
       }
-      # TODO: add
-      # https://github.com/mikavilpas/yazi.nvim
-
-      # TODO: make this one work
-      {
-        name = "render-markdown.nvim";
-        owner = "MeanderingProgrammer";
-        hash = "sha256-Smt9v6/XyHUdUiIPyCPQSRvWCeMMhYITSZWd9M7Jlvs=";
-        setupModule = "render-markdown";
-      }
     ];
 
     treesitter = {
@@ -103,16 +102,29 @@ in
       ];
     };
 
+    diagnostics = {
+      enable = true;
+      config = {
+        update_in_insert = true;
+        virtual_text = true;
+      };
+    };
+
     clipboard = {
       enable = true;
       providers.wl-copy.enable = true;
+    };
+
+    # TODO: continue
+    terminal.toggleterm = {
+      enable = true;
+      winbar.enabled = true;
     };
 
     autocomplete.blink-cmp.enable = true;
     autopairs.nvim-autopairs.enable = true;
     binds.cheatsheet.enable = true;
     binds.whichKey.enable = true;
-    diagnostics.enable = true;
     formatter.conform-nvim.enable = true;
     git.gitsigns.enable = true;
     lazy.enable = true;
@@ -120,10 +132,10 @@ in
     lsp.trouble.enable = true;
     notes.todo-comments.enable = true;
     statusline.lualine.enable = true;
-    terminal.toggleterm.enable = true;
     ui.colorizer.enable = true;
     ui.nvim-ufo.enable = true;
     utility.surround.enable = true;
+    utility.yazi-nvim.enable = true;
     visuals.indent-blankline.enable = true;
     visuals.nvim-web-devicons.enable = true;
   };
