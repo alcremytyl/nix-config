@@ -90,7 +90,11 @@
       "HYPRCURSOR_SIZE,24"
     ];
 
-    monitor = ",preferred,auto,auto";
+    monitor = [
+      "eDP-1,preferred,auto,auto" 
+      "HDMI-A-1,preferred,auto,auto,mirror,eDP-1"
+    ];
+
 
     general = {
       gaps_in = 5;
