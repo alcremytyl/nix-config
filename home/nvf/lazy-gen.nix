@@ -9,6 +9,7 @@ plugins: builtins.listToAttrs (
       branch = plugin.branch or "main";
       hash = plugin.hash or "";
       lazy_val = if builtins.hasAttr "lazy" plugin then plugin.lazy else true;
+      cmd = if builtins.hasAttr "cmd" plugin then plugin.cmd else "";
     in {
       name = name;
       value = {
@@ -24,6 +25,7 @@ plugins: builtins.listToAttrs (
         };
         setupModule = plugin.setupModule or pname;
         lazy = lazy_val;
+        cmd = [cmd];
       };
     }
   ) plugins

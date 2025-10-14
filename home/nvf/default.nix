@@ -1,9 +1,8 @@
 # https://notashelf.github.io/nvf/index.xhtml
-{ pkgs }:
+{ pkgs, nvf }:
 let 
   bindgen = import ./keybind-gen.nix;
   lazygen = import ./lazy-gen.nix{inherit pkgs;};
-  inherit (pkgs.lib.nvim.binds) mkKeymap ;
 in 
   {
   enable = true;
@@ -41,9 +40,6 @@ in
     # TODO: change this to use mkKeymap
     # https://notashelf.github.io/nvf/index.xhtml#sec-custom-key-mappings
 
-    # keymaps = builtins.map () [
-
-    # ];
 
     keymaps = bindgen[
       # TODO: implement some of these
@@ -63,7 +59,7 @@ in
 
       [ "<leader>ch" ":Cheatsheet<CR>" "Cheatsheet"{}] # TODO: migrate to NvChad's 
     ];
-
+     
     # https://github.com/NotAShelf/nvf/discussions/1013
     # https://notashelf.github.io/nvf/index.xhtml#sec-lazy-method
     lazy.plugins = lazygen[
@@ -112,13 +108,14 @@ in
 
     clipboard = {
       enable = true;
+      registers = "unnamedplus";
       providers.wl-copy.enable = true;
     };
 
     # TODO: continue
     terminal.toggleterm = {
       enable = true;
-      winbar.enabled = true;
+      setupOpts.enable.winbar = true;
     };
 
     autocomplete.blink-cmp.enable = true;

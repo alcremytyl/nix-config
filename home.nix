@@ -12,7 +12,7 @@ in {
   wayland.windowManager.hyprland = import ./home/hyprland.nix;
   programs.fish = import ./home/fish.nix;
   programs.kitty = import ./home/kitty.nix;
-  programs.nvf = import ./home/nvf/default.nix{inherit pkgs;};
+  programs.nvf = import ./home/nvf/default.nix{inherit pkgs; nvf = inputs.nvf;};
   programs.waybar = import ./home/waybar/default.nix;
 
 
@@ -42,7 +42,6 @@ in {
     # ui
     # waybar
     rofi
-    rofi-calc # TODO: implement
     dunst
     libnotify
 
