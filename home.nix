@@ -34,6 +34,39 @@ in {
     enable = true;
     enableFishIntegration = true;
   };
+
+  services.dunst = {
+    enable = true;
+    settings = let 
+      # NOTE: opacity 40% = 0x66, 60% = 0x99
+      fg = "#cdd6f4";
+      bg = "#1e1e2e";
+      frame = "#89b4fa";
+      frame-critical = "#fab387";
+    in {
+      global = {
+        frame_color = frame;
+        separator_color= "#89b4fa";
+        highlight = "#89b4fa";
+      };
+
+      urgency_low = {
+        background = bg;
+        foreground = fg;
+      };
+
+      urgency_normal = {
+        background = bg;
+        foreground = fg;
+      };
+
+      urgency_critical = {
+        background = bg;
+        foreground = fg;
+        frame_color = frame-critical;
+      };
+    };
+  };
  
 
   # The home.packages option allows you to install Nix packages into your
@@ -42,7 +75,7 @@ in {
     # ui
     # waybar
     rofi
-    dunst
+    # dunst
     libnotify
 
     # cli
