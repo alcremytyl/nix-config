@@ -96,6 +96,7 @@ in {
     gcc
     gnumake
     python312
+    nodePackages.npm
 
     # so professors don't get angry
     dbeaver-bin

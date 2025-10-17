@@ -6,6 +6,7 @@ let
 in 
   {
   enable = true;
+  lazy = import ./lazy.nix{inherit pkgs;};
 
   settings.vim = {
     options = {
@@ -37,10 +38,6 @@ in
       ts.enable = true;
     };
 
-    # TODO: change this to use mkKeymap
-    # https://notashelf.github.io/nvf/index.xhtml#sec-custom-key-mappings
-
-
     keymaps = bindgen[
       # TODO: implement some of these
       # https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/mappings.lua
@@ -62,21 +59,7 @@ in
      
     # https://github.com/NotAShelf/nvf/discussions/1013
     # https://notashelf.github.io/nvf/index.xhtml#sec-lazy-method
-    lazy.plugins = lazygen[
-      {
-        name = "netrw.nvim";
-        owner = "prichrd";
-        branch = "master";
-        hash = "sha256-tEO+omzlaC0uFkIHebeqnGtiPbDelRTBJONEnTy0F9U=";
-        lazy = false;
-        setupModule = "netrw";
-      }
-      {
-        name = "devcontainer";
-        owner = "esensar";
-        hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
-      }
-    ];
+
 
     treesitter = {
       enable = true;
@@ -124,7 +107,6 @@ in
     binds.whichKey.enable = true;
     formatter.conform-nvim.enable = true;
     git.gitsigns.enable = true;
-    lazy.enable = true;
     lsp.enable = true;
     lsp.trouble.enable = true;
     notes.todo-comments.enable = true;

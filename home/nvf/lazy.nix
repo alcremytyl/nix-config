@@ -6,22 +6,44 @@
       setupModule = "netrw";
       lazy = false;
     };
-    "nvim-dev-container" = {
+    "devcontainer" = {
       setupModule = "devcontainer";
-      package = pkgs.fetchFromGitHub {
-        owner = "esensar";
-        repo = "nvim-dev-container";
-        hash = "sha256-ek/6/gBweO75JoVx9MQcnxeqkLvEDTKvGeQZnlDNCmc=";
-        rev = "main";
+      package = pkgs.vimUtils.buildVimPlugin {
+        version = "main";
+        pname = "devcontainer";
+        src = pkgs.fetchFromGitHub {
+          owner = "esensar";
+          repo = "nvim-dev-container";
+          hash = "sha256-+cKryzHutDKJ3cOkrwgILH4meHwWjt93jJkEkt3tzJg=";
+          rev = "main";
+        };
       };
     };
-      # {
-      #   name = "swagger-preview.nvim";
-      #   owner = "vinnymeller";
-      #   branch = "main";
-      #   hash = "sha256-o4jQMFjlQvWYUYsDYBcTRDxZemBOuDWe3ZyQm02yLm0=";
-      #   cmd = "SwaggerPreview";
-      # }
-  
-  }
+    "swagger-preview" = {
+      cmd = "SwaggerPreview";
+      setupModule = "swagger-preview";
+      package = pkgs.vimUtils.buildVimPlugin {
+        version = "main";
+        pname = "swagger-preview";
+        src = pkgs.fetchFromGitHub {
+          repo = "swagger-preview.nvim";
+          owner = "vinnymeller";
+          rev = "main";
+          hash = "sha256-o4jQMFjlQvWYUYsDYBcTRDxZemBOuDWe3ZyQm02yLm0=";
+        };
+      };
+    };
+  };
 }
+
+
+# package = pkgs.vimUtils.buildVimPlugin {
+  # pname = pname;
+  # version = branch;
+    # src = pkgs.fetchFromGitHub {
+    # owner = plugin.owner;
+    # repo = repo;
+    # rev = branch;
+    # hash = hash;
+    # };
+  # };
