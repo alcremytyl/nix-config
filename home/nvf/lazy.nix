@@ -20,6 +20,7 @@
       };
     };
     "swagger-preview" = {
+      # build = "npm i";
       cmd = "SwaggerPreview";
       setupModule = "swagger-preview";
       package = pkgs.vimUtils.buildVimPlugin {

@@ -1,14 +1,26 @@
 # https://notashelf.github.io/nvf/index.xhtml
 { pkgs, nvf }:
 let 
-  bindgen = import ./keybind-gen.nix;
-  lazygen = import ./lazy-gen.nix{inherit pkgs;};
+  bindgen = builtins.map (args:
+    let
+      mode   = builtins.elemAt args 0;
+      key    = builtins.elemAt args 1;
+      action = builtins.elemAt args 2;
+      desc   = builtins.elemAt args 3;
+      extras = builtins.elemAt args 4 // {};
+      # silent = if builtins.hasAttr "silent" extras then extras.silent else true;
+    in
+      { inherit mode key action desc; silent = true; } // extras 
+    );
+
+
 in 
   {
   enable = true;
-  lazy = import ./lazy.nix{inherit pkgs;};
 
   settings.vim = {
+    lazy = import ./lazy.nix{inherit pkgs;};
+
     options = {
       tabstop = 2;
       shiftwidth = 2;
@@ -39,22 +51,27 @@ in
     };
 
     keymaps = bindgen[
-      # TODO: implement some of these
-      # https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/mappings.lua
-      [ "<Esc>" ":noh<CR>" "General clear highlights"{} ]
+      [ "n" "<Esc>" ":noh<CR>" "General clear highlights"{} ]
 
-      [ "<leader>gc" ":Telescope git_commits<CR>" "Telescope git commits"{} ]
-      [ "<leader>gs" ":Telescope git_stash<CR>"   "Telescope git stash"{} ]
-      [ "<leader>gS" ":Telescope git_status<CR>"  "Telescope git status"{} ]
-      [ "<leader>gT" ":TodoTelescope<CR>"  "Telescope todo list"{} ]
+      [ "n" "<leader>gc" ":Telescope git_commits<CR>" "Telescope git commits"{} ]
+      [ "n" "<leader>gs" ":Telescope git_stash<CR>"   "Telescope git stash"{} ]
+      [ "n" "<leader>gS" ":Telescope git_status<CR>"  "Telescope git status"{} ]
+      [ "n" "<leader>gT" ":TodoTelescope<CR>"         "Telescope todo list"{} ]
 
-      [ "<leader>fd" ":Yazi<CR>" "Yazi open"{} ]
+      [ "n" "<leader>fd" ":Yazi<CR>" "Yazi open"{} ]
 
-      [ "<leader>q"  ":q<CR>"  "Quit file"{} ]
-      [ "<leader>w"  ":w<CR>"  "Save file"{} ]
-      [ "<leader>wq" ":wq<CR>" "Save and quit"{} ]
+      [ "n" "<leader>q"  ":q<CR>"  "Quit file"{} ]
+      [ "n" "<leader>w"  ":w<CR>"  "Save file"{} ]
+      [ "n" "<leader>wq" ":wq<CR>" "Save and quit"{} ]
 
-      [ "<leader>ch" ":Cheatsheet<CR>" "Cheatsheet"{}] # TODO: migrate to NvChad's 
+      [ "n" "<leader>ch" ":Cheatsheet<CR>" "Cheatsheet"{} ] # TODO: migrate to NvChad's 
+
+      [ "n" "<leader>b" ":enew<CR>" "Buffer new"{} ]
+      [ "n" "<leader>x" ":bd<CR>"   "Buffer close"{} ]
+
+      [ "n" "<leader>v" ":ToggleTerm direction=vertical<CR>"   "Terminal vertical"{} ]
+      [ "n" "<leader>v" ":ToggleTerm direction=horizontal<CR>" "Terminal horizontal"{} ]
+      [ "t" "<C-x>" "<C-\\><C-N>" "Terminal escape" { } ]
     ];
      
     # https://github.com/NotAShelf/nvf/discussions/1013
