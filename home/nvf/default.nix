@@ -19,7 +19,7 @@ in
   enable = true;
 
   settings.vim = {
-    lazy = import ./lazy.nix{inherit pkgs;};
+    lazy = import ./lazy.nix{inherit pkgs nvf;};
 
     options = {
       tabstop = 2;

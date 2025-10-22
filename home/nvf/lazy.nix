@@ -1,4 +1,4 @@
-{pkgs}: {
+{pkgs, nvf}: {
   enable = true;
   plugins = {
     "netrw.nvim" = {
@@ -34,6 +34,20 @@
         };
       };
     };
+    # doesn't build, wait for them to fix
+    # "rest-nvim" = {
+    #   setupModule = "rest-nvim";
+    #   package = pkgs.vimUtils.buildVimPlugin {
+    #     version = "main";
+    #     pname = "rest-nvim";
+    #     src = pkgs.fetchFromGitHub {
+    #       repo = "rest.nvim";
+    #       owner = "rest-nvim";
+    #       rev = "main";
+    #       hash = "sha256-BeHFGi8QPNJZwDbW7mI7hrakQGfIolnOiYYxcr2jNLU=";
+    #     };
+    #   };
+    # };
   };
 }
 
