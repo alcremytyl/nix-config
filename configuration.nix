@@ -32,7 +32,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.firewall.allowedTCPPorts = [ 3306 ];
+  networking.firewall.allowedTCPPorts = [ 10350 3306 ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
 
@@ -56,12 +56,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "us";
-  #   variant = "";
-  # };
 
   virtualisation.docker.enable = true;
 
@@ -89,6 +83,7 @@
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
 
+  environment.pathsToLink = [ "/share/fish" ];
   environment.systemPackages = with pkgs; [
     vim 
     # neovim

@@ -70,7 +70,7 @@ in
       [ "n" "<leader>x" ":bd<CR>"   "Buffer close"{} ]
 
       [ "n" "<leader>v" ":ToggleTerm direction=vertical<CR>"   "Terminal vertical"{} ]
-      [ "n" "<leader>v" ":ToggleTerm direction=horizontal<CR>" "Terminal horizontal"{} ]
+      [ "n" "<leader>h" ":ToggleTerm direction=horizontal<CR>" "Terminal horizontal"{} ]
       [ "t" "<C-x>" "<C-\\><C-N>" "Terminal escape" { } ]
     ];
      

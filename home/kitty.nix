@@ -1,8 +1,9 @@
 {
   enable = true;
+  # font.
+  font.name = "JetBrainsMono Nerd Font";
   settings = {
     shell = "fish";
-    font= "JetBrainsMono Nerd Font";
     background_blur = 1;
     background_opacity = 0.7;
     enable_audio_bell = false;
