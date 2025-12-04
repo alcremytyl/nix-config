@@ -19,21 +19,22 @@
         };
       };
     };
-    "swagger-preview" = {
-      # build = "npm i";
-      cmd = "SwaggerPreview";
-      setupModule = "swagger-preview";
-      package = pkgs.vimUtils.buildVimPlugin {
-        version = "main";
-        pname = "swagger-preview";
-        src = pkgs.fetchFromGitHub {
-          repo = "swagger-preview.nvim";
-          owner = "vinnymeller";
-          rev = "main";
-          hash = "sha256-o4jQMFjlQvWYUYsDYBcTRDxZemBOuDWe3ZyQm02yLm0=";
-        };
-      };
-    };
+    # can't install dependency
+    # "swagger-preview" = {
+    #   # build = "npm i";
+    #   cmd = "SwaggerPreview";
+    #   setupModule = "swagger-preview";
+    #   package = pkgs.vimUtils.buildVimPlugin {
+    #     version = "main";
+    #     pname = "swagger-preview";
+    #     src = pkgs.fetchFromGitHub {
+    #       repo = "swagger-preview.nvim";
+    #       owner = "vinnymeller";
+    #       rev = "main";
+    #       hash = "sha256-o4jQMFjlQvWYUYsDYBcTRDxZemBOuDWe3ZyQm02yLm0=";
+    #     };
+    #   };
+    # };
     # doesn't build, wait for them to fix
     # "rest-nvim" = {
     #   setupModule = "rest-nvim";

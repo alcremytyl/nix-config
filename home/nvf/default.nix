@@ -27,6 +27,8 @@ in
       expandtab = true;
       foldmethod = "manual";
       foldlevel = 99;
+
+      shell = "${pkgs.fish}/bin/fish";
     };
 
     theme = {
@@ -42,11 +44,15 @@ in
       bash.enable = true;
       html.enable = true;
       java.enable = true;
-      markdown.enable = true;
-      markdown.extensions.render-markdown-nvim.enable = true;
+      markdown = {
+        enable = true;
+        extensions.render-markdown-nvim.enable = true;
+      };
       nix.enable = true;
       python.enable = true;
       rust.enable = true;
+      # [wait until fixed](https://github.com/NotAShelf/nvf/issues/920)
+      # sql.enable = true;
       ts.enable = true;
     };
 
@@ -95,6 +101,7 @@ in
         "target/"
         "result/"
         "_site/"
+        "%.pyc"
       ];
     };
 

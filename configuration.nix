@@ -13,6 +13,26 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "floorp.desktop";
+      "x-scheme-handler/http" = "floorp.desktop";
+      "x-scheme-handler/https" = "floorp.desktop";
+    };
+  };
+
+  # for flatpak
+  xdg.portal = {
+    enable = true;
+    config.common.default = [ "gtk" ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      #      xdg-desktop-portal-kde
+      #      xdg-desktop-portal-gtk
+    ];
+  };
+  services.flatpak.enable = true;
 
   services.greetd = {
     enable = true;

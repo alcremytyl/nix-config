@@ -7,7 +7,11 @@ in {
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
 
-  imports = [ inputs.nvf.homeManagerModules.default];
+  imports = [ 
+    inputs.nvf.homeManagerModules.default
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+  ];
+
 
   wayland.windowManager.hyprland = import ./home/hyprland.nix;
   programs.fish = import ./home/fish.nix{inherit pkgs;};
@@ -15,12 +19,33 @@ in {
   programs.nvf = import ./home/nvf/default.nix{inherit pkgs; nvf = inputs.nvf;};
   programs.waybar = import ./home/waybar/default.nix;
 
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "org.vinegarhq.Sober"
+      "com.parsecgaming.parsec"
+    ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    keyMode = "vi";
+    terminal = "xterm-256color";
+    extraConfig = ''
+      set -g default-command fish
+    '';
+    plugins = with pkgs.tmuxPlugins; [
+      tmux-fzf
+      catppuccin
+      tmux-which-key
+      tmux-powerline
+    ];
+  };
 
   programs.rofi = {
     enable = true;
     theme = "material";
   };
-
 
   services.hyprpaper = {
     enable = true;
@@ -89,6 +114,7 @@ in {
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    DEFAULT_BROWSER = "floorp";
   };
 
   programs.home-manager.enable = true;
