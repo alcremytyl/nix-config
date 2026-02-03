@@ -1,3 +1,17 @@
+# { config, options, lib, ... }:
+# let 
+#   inherit (lib.nvim.binds) mkKeymap;
+# 
+#   cfg = config.vim.plugin;
+# 
+#   keys = cfg.mappings;
+#   inherit (options.vim.lsp.trouble) mappings;
+# in 
+# {
+#   programs.nvf.settings.vim.keymaps = [
+#     (mkKeymap "n" keys.workspaceDiagnostics "<cmd>Trouble toggle diagnostics<CR>" {desc = mappings.workspaceDiagnostics.description;})
+#   ];
+# }
 let 
   bindgen = builtins.map (args:
     let
