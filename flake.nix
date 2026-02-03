@@ -11,13 +11,15 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      allowUnfree = true;
-      config.useGlobalPkgs = true;
+      config = {
+        allowUnfree = true;
+        useGlobalPkgs = true;
+      };
     };
   in
   {
     homeConfigurations."mytyl" = home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgs;
+        inherit pkgs;
         modules = [
           # ./configuration.nix
           # ./hardware-configuration.nix

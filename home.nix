@@ -74,7 +74,7 @@
     btop
     fzf
     highlight
-    home-manager
+    # home-manager
     ripgrep
     starship
     unrar
@@ -110,7 +110,7 @@
   ];
 
 
-  xdg.mime = {
+  xdg.mimeApps = {
     enable = true;
     defaultApplications = {
       "text/html" = "floorp.desktop";
