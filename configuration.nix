@@ -38,7 +38,8 @@
     enable = true;
     settings = rec {
       initial_session = {
-        command = "Hyprland";
+        command = "start-hyprland";
+        # command = "Hyprland";
         user = "mytyl";
       };
       default_session = initial_session;

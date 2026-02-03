@@ -1,7 +1,5 @@
 { pkgs,  ... }@inputs:
-let
-  wallpaper = "/etc/nixos/assets/wallpaper.png";
-in {
+{
   home.username = "mytyl";
   home.homeDirectory = "/home/mytyl";
   home.stateVersion = "25.05"; # Please read the comment before changing.
@@ -47,11 +45,16 @@ in {
     theme = "material";
   };
 
-  services.hyprpaper = {
+  services.hyprpaper = 
+  let
+    wp = "/home/mytyl/.config/hypr/wallpaper.png";
+  in 
+  {
     enable = true;
     settings = {
-      preload = [ wallpaper ];
-      wallpaper = [ "eDP-1,${wallpaper}" ];
+      wallpaper = [ {monitor="eDP-1"; path=wp; } ];
+      # preload = [ wallpaper ];
+      # wallpaper = [ "eDP-1,${wallpaper}" ];
     };
   };
 
@@ -100,7 +103,7 @@ in {
 
     # apps
     discord
-    floorp
+    floorp-bin
 
 
     # deps

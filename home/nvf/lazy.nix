@@ -1,24 +1,25 @@
 {pkgs, nvf}: {
   enable = true;
   plugins = {
-    "netrw.nvim" = {
-      package = pkgs.vimPlugins.netrw-nvim;
-      setupModule = "netrw";
-      lazy = false;
-    };
-    "devcontainer" = {
-      setupModule = "devcontainer";
-      package = pkgs.vimUtils.buildVimPlugin {
-        version = "main";
-        pname = "devcontainer";
-        src = pkgs.fetchFromGitHub {
-          owner = "esensar";
-          repo = "nvim-dev-container";
-          hash = "sha256-+cKryzHutDKJ3cOkrwgILH4meHwWjt93jJkEkt3tzJg=";
-          rev = "main";
-        };
-      };
-    };
+    # "netrw.nvim" = {
+    #   package = pkgs.vimPlugins.netrw-nvim;
+    #   setupModule = "netrw";
+    #   lazy = false;
+    # };
+    # "devcontainer" = {
+    #   setupModule = "devcontainer";
+    #   package = pkgs.vimUtils.buildVimPlugin {
+    #     version = "main";
+    #     pname = "devcontainer";
+    #     src = pkgs.fetchFromGitHub {
+    #       owner = "esensar";
+    #       repo = "nvim-dev-container";
+    #       # hash = "sha256-+cKryzHutDKJ3cOkrwgILH4meHwWjt93jJkEkt3tzJg=";
+    #       hash = "sha256-N2m4AxjvcBlnkkfujdoHx/QJpoA/BYOg/DWY7X8TQgI=";
+    #       rev = "main";
+    #     };
+    #   };
+    # };
     # can't install dependency
     # "swagger-preview" = {
     #   # build = "npm i";
