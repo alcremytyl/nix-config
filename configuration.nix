@@ -11,26 +11,26 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 
-  xdg.mime = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "floorp.desktop";
-      "x-scheme-handler/http" = "floorp.desktop";
-      "x-scheme-handler/https" = "floorp.desktop";
-    };
-  };
+  # xdg.mime = {
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "floorp.desktop";
+  #     "x-scheme-handler/http" = "floorp.desktop";
+  #     "x-scheme-handler/https" = "floorp.desktop";
+  #   };
+  # };
 
-  # for flatpak
-  xdg.portal = {
-    enable = true;
-    config.common.default = [ "gtk" ];
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      #      xdg-desktop-portal-kde
-      #      xdg-desktop-portal-gtk
-    ];
-  };
-  services.flatpak.enable = true;
+  # # for flatpak
+  # xdg.portal = {
+  #   enable = true;
+  #   config.common.default = [ "gtk" ];
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-wlr
+  #     #      xdg-desktop-portal-kde
+  #     #      xdg-desktop-portal-gtk
+  #   ];
+  # };
+  # services.flatpak.enable = true;
 
   services.greetd = {
     enable = true;
@@ -78,17 +78,17 @@
 
   virtualisation.docker.enable = true;
 
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-    dataDir = "/var/lib/mariadb/data";
-    settings.mysqld = {
-      bind-address = "0.0.0.0";
-      port = 3306;
-      skip-networking = false;
+  # services.mysql = {
+  #   enable = true;
+  #   package = pkgs.mariadb;
+  #   dataDir = "/var/lib/mariadb/data";
+  #   settings.mysqld = {
+  #     bind-address = "0.0.0.0";
+  #     port = 3306;
+  #     skip-networking = false;
 
-    };
-  };
+  #   };
+  # };
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -108,7 +108,7 @@
     # neovim
     git
     wget
-    kitty
+    # kitty
   ];
 
 

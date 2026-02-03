@@ -1,16 +1,22 @@
-{ pkgs, ...}@inputs:
+{ pkgs,  ... }@inputs:
 {
-  home = {
-    username = "mytyl";
-    homeDirectory = "/home/mytyl";
-    stateVersion = "25.05";
-  };
+  home.username = "mytyl";
+  home.homeDirectory = "/home/mytyl";
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  wayland.windowManager.hyprland = import ./home.bak/hyprland.nix;
-  programs.fish = import ./home.bak/fish.nix{inherit pkgs;};
-  programs.kitty = import ./home.bak/kitty.nix;
+
+  imports = [ 
+    inputs.nvf.homeManagerModules.default
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+    ./home/nvf
+  ];
+
+
+  wayland.windowManager.hyprland = import ./home/hyprland.nix;
+  programs.fish = import ./home/fish.nix{inherit pkgs;};
+  programs.kitty = import ./home/kitty.nix;
   #programs.nvf = import ./home/nvf/default.nix{inherit pkgs; nvf = inputs.nvf;};
-  programs.waybar = import ./home.bak/waybar/default.nix;
+  programs.waybar = import ./home/waybar/default.nix;
 
   services.flatpak = {
     enable = true;
@@ -58,7 +64,7 @@
     enableFishIntegration = true;
   };
 
-  services.dunst = import ./home.bak/dunst.nix;
+  services.dunst = import ./home/dunst.nix;
  
 
   # The home.packages option allows you to install Nix packages into your
@@ -109,25 +115,6 @@
     wl-clipboard
   ];
 
-
-  xdg.mime = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "floorp.desktop";
-      "x-scheme-handler/http" = "floorp.desktop";
-      "x-scheme-handler/https" = "floorp.desktop";
-    };
-  };
-
-  xdg.portal = {
-    enable = true;
-    config.common.default = [ "gtk" ];
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      #      xdg-desktop-portal-kde
-      #      xdg-desktop-portal-gtk
-    ];
-  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
