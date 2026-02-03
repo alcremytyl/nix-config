@@ -8,8 +8,6 @@
     # glaring security vuln we simply ignore
     eval (ssh-agent -c) > /dev/null
     grep -slR "PRIVATE" ~/.ssh/ | xargs ssh-add &> /dev/null
-
-    echo "bollocks"
   '';
   functions = {
     fish_command_not_found = ''
@@ -17,6 +15,9 @@
     '';
     nixos-refresh = ''
       sudo nixos-rebuild switch --flake /etc/nixos#mytyl $argv
+    '';
+    bollocks = ''
+      echo hello world
     '';
   };
 }

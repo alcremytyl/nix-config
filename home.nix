@@ -6,7 +6,12 @@
     stateVersion = "25.05";
   };
 
-  wayland.windowManager.hyprland = import ./home.bak/hyprland.nix;
+  imports = [
+    ./home/hyprland
+    ./home/fish
+  ];
+
+  # wayland.windowManager.hyprland = import ./home.bak/hyprland.nix;
   programs.fish = import ./home.bak/fish.nix{inherit pkgs;};
   programs.kitty = import ./home.bak/kitty.nix;
   #programs.nvf = import ./home/nvf/default.nix{inherit pkgs; nvf = inputs.nvf;};
