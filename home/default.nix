@@ -11,16 +11,16 @@
   };
 
   imports = [
-    ./home/dunst
-    ./home/fish
-    ./home/flatpak
-    ./home/hyprland # and hyprpaper
-    ./home/kitty
-    ./home/rofi
-    ./home/tmux
-    ./home/waybar
-    ./home/xdg
-    ./home/zoxide
+    ./dunst
+    ./fish
+    ./flatpak
+    ./hyprland # and hyprpaper
+    ./kitty
+    ./rofi
+    ./tmux
+    ./waybar
+    ./xdg
+    ./zoxide
   ];
 
   # The home.packages option allows you to install Nix packages into your
