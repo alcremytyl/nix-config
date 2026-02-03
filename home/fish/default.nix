@@ -1,0 +1,22 @@
+{ ... }: {
+  enable = true;
+  interactiveShellInit = ''
+    set fish_greeting
+    starship init fish | source
+    nvf-print-config > ~/.config/nvim/init.lua
+
+    # glaring security vuln we simply ignore
+    eval (ssh-agent -c) > /dev/null
+    grep -slR "PRIVATE" ~/.ssh/ | xargs ssh-add &> /dev/null
+
+    echo "bollocks"
+  '';
+  functions = {
+    fish_command_not_found = ''
+      echo "fish: Unknown command: $argv[1]"
+    '';
+    nixos-refresh = ''
+      sudo nixos-rebuild switch --flake /etc/nixos#mytyl $argv
+    '';
+  };
+}
