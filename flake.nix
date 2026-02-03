@@ -27,7 +27,7 @@
           nvf.homeManagerModules.default
           nix-flatpak.homeManagerModules.nix-flatpak
 
-          ./home.nix
+          ./home
       ];
     };
   };
