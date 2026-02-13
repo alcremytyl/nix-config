@@ -2,15 +2,22 @@
   programs.tmux = {
     enable = true;
     keyMode = "vi";
+    shell = "${pkgs.fish}/bin/fish";
     terminal = "xterm-256color";
-    extraConfig = ''
-      set -g default-command fish
-    '';
     plugins = with pkgs.tmuxPlugins; [
-      tmux-fzf
       catppuccin
       tmux-which-key
-      tmux-powerline
     ];
+      # set -g default-command fish
+    extraConfig = ''
+      set -g @catppuccin_flavor 'machiatto'
+    '';
+    # 
+    # set -g @plugin 'tmux-plugins/tmux-battery'
+    # set -agF status-right "#{E:@catppuccin_status_battery}"
   };
+
+  # for which-key
+  # programs.dash.enable = true;
 }
+
