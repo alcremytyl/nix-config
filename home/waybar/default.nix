@@ -76,6 +76,6 @@
       };
     }];
 
-    style = builtins.readFile ./themes/ellfouts.css;
+    style = builtins.readFile ./ellfouts.css;
   };
 }

@@ -71,6 +71,9 @@
     wl-clipboard
   ];
 
+  # services.openssh.enable = true;
+  programs.ssh.enable = true;
+
 
 
   # home.

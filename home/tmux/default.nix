@@ -9,7 +9,11 @@
       tmux-which-key
     ];
       # set -g default-command fish
-    extraConfigBeforePlugins = builtins.readFile ./theme.tmux;
+    # extraConfig = builtins.readFile ./theme.tmux;
+    extraConfig = ''
+      set -g @catppuccin_flavor 'machiatto'
+      set -g @catppuccin_date_time "%Y-%m-%d | %H:%M"
+    '';
     # 
     # set -g @plugin 'tmux-plugins/tmux-battery'
     # set -agF status-right "#{E:@catppuccin_status_battery}"
