@@ -26,10 +26,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # ui
-    # waybar
-    rofi
-    # dunst
     libnotify
 
     # cli
@@ -53,8 +49,6 @@
     nodePackages.npm
 
     # so professors don't get angry
-    dbeaver-bin
-    mariadb
     vscode
 
 
@@ -71,11 +65,6 @@
     wl-clipboard
   ];
 
-  # services.openssh.enable = true;
-  programs.ssh.enable = true;
 
-
-
-  # home.
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
 }

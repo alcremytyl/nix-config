@@ -206,6 +206,6 @@
 
   programs.hyprshot = {
     enable = true;
-    hyprshot.saveLocation = "$HOME/Pictures/Screenshots";
+    saveLocation = "$HOME/Pictures/Screenshots";
   };
 }
