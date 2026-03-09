@@ -65,7 +65,7 @@
 
     # deps
     brightnessctl
-    hyprshot
+    # hyprshot, in hyprland.nix now
     hyprpaper
     playerctl
     wl-clipboard

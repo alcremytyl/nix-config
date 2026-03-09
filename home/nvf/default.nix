@@ -1,5 +1,5 @@
-# https://notashelf.github.io/nvf/index.xhtml
-{ config, lib, pkgs, ...}:
+
+{ pkgs, ...}:
 {
   imports = [./keybinds.nix];
 
@@ -34,19 +34,18 @@
         clang.enable = true;
         html.enable = true;
         java.enable = true;
-        markdown = {
-          enable = true;
-          extensions.render-markdown-nvim.enable = true;
-        };
+        markdown.enable = true;
+        markdown.extensions.markview-nvim.enable = true;
+        markdown.extensions.render-markdown-nvim.enable = true;
         nix.enable = true;
         python.enable = true;
         rust.enable = true;
         # [wait until fixed](https://github.com/NotAShelf/nvf/issues/920)
-        # sql.enable = true;
+        sql.enable = true;
         ts.enable = true;
       };
 
-      keymaps =  import ./keybinds.nix;
+      # keymaps =  import ./keybinds.nix;
       # https://github.com/NotAShelf/nvf/discussions/1013
       # https://notashelf.github.io/nvf/index.xhtml#sec-lazy-method
 
@@ -86,7 +85,6 @@
         providers.wl-copy.enable = true;
       };
 
-      # TODO: continue
       terminal.toggleterm = {
         enable = true;
         setupOpts.enable.winbar = true;
@@ -101,6 +99,7 @@
       lsp.enable = true;
       lsp.trouble.enable = true;
       notes.todo-comments.enable = true;
+      presence.neocord.enable = true;
       statusline.lualine.enable = true;
       ui.colorizer.enable = true;
       ui.nvim-ufo.enable = true;

@@ -2,6 +2,7 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      "application/pdf" = "floorp.desktop";
       "text/html" = "floorp.desktop";
       "x-scheme-handler/http" = "floorp.desktop";
       "x-scheme-handler/https" = "floorp.desktop";
