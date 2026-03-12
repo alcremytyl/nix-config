@@ -1,4 +1,6 @@
 {...}: {
+
+  # TODO: add brightness
   programs.waybar = {
     enable = true;
     settings = [{

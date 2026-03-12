@@ -3,7 +3,7 @@
  * Rofi version: 2.0.0
  **/
 * {
-  base02:           rgba ( 49, 69, 73, 100 % );
+  base02:           rgba ( 255, 255, 73, 100 % );
   base0C:           rgba ( 137, 221, 255, 100 % );
   base05:           rgba ( 238, 255, 255, 100 % );
   base0F:           rgba ( 255, 83, 112, 100 % );
@@ -21,19 +21,30 @@
   base07:           White;
   spacing:          0;
   background-color: transparent;
+  
+  dark1: #282937;
+  dark2: #393F4E;
+  gray1: #868384;
+  gray2: #9B9A95; 
+  beige: #DCD6C4;
+  white: #ECF1EC;
+  bluer: #98C5E0;
+  purple: #382654;
+  background: rgba(24, 25, 38, 60%);
 
-  out-border: rgba( 51, 204, 255, 90 % );
+  niceassblue: rgba( 51, 204, 255, 90 % );
 }
 window {
   transparency:     "real";
-  background-color: rgba ( 24, 25, 38, 60 % );
+  background-color: var(background);
   border: 2px;
-  border-color: var(out-border);
+  border-color: var(niceassblue);
   border-radius:    10px;
 }
+/** TODO: continue here, open wayland and waybar configs for reference **/
 mainbox {
   padding:      30px 0px ;
-  border-color: var(out-border);
+  border-color: var(niceassblue);
   spacing:      30px ;
   children:     [ "inputbar","message","listview" ];
 }
@@ -42,7 +53,7 @@ inputbar {
   children: [ "prompt","textbox-prompt-colon","entry","case-indicator" ];
 }
 prompt {
-  text-color: var(base0D);
+  text-color: var(bluer);
 }
 textbox-prompt-colon {
   margin:     0px 1.0000ch 0px 0px ;

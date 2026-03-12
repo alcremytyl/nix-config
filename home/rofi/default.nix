@@ -3,8 +3,8 @@
     enable = true;
     modes = [ "drun" ];
     # plugins = [ ];
-    # theme = "material";
-    theme = builtins.readFile "./config.rasi";
+    # TODO: figure out how to copy paste rasi into here or just nix it 
+    theme = "material";
   };
 }
 
