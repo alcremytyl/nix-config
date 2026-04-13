@@ -4,6 +4,7 @@
     packages = [
       "org.vinegarhq.Sober"
       "com.parsecgaming.parsec"
+      "it.mijorus.gearlever"
     ];
   };
 }

@@ -7,9 +7,9 @@
       reload_on_style_change = true;
       position = "top";
 
-      modules-left = ["clock" "tray"];
+      modules-left = ["clock" "tray" "temperature#cpu" "temperature#igpu" "temperature#dgpu"];
       modules-center = ["hyprland/workspaces"];
-      modules-right = ["group/expand" "network" "battery" "pulseaudio"]; 
+      modules-right = ["group/expand" "network" "battery" "temperature" "pulseaudio"]; 
 
       
       "hyprland/workspaces" = {
@@ -75,6 +75,21 @@
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         on-scroll-up = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-";
         on-scroll-down = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+";
+      };
+
+      "temperature#cpu" = {
+        hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+        format = "CPU {temperatureC}°C";
+      };
+
+      "temperature#dgpu" = {
+        hwmon-path = "/sys/class/hwmon/hwmon4/temp1_input";
+        format = "GPU {temperatureC}°C";
+      };
+
+      "temperature#igpu" = {
+        hwmon-path = "/sys/class/hwmon/hwmon5/temp1_input";
+        format = "GPU {temperatureC}°C";
       };
     }];
 

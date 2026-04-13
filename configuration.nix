@@ -1,5 +1,5 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# your system.  Help is available in the configuration.nix(5) man pageconfig
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
@@ -55,6 +55,10 @@
     variant = "";
   };
 
+  hardware.graphics.enable = true;
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   services.greetd = {
     enable = true;
     settings = rec {
@@ -71,8 +75,8 @@
   hardware.uinput.enable = true;
   boot.kernelModules = [ "uinput" ];
 
-  # hardware.bluetooth.enable = true;
-  # services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # audio
   security.rtkit.enable = true;
@@ -88,9 +92,9 @@
 
   xdg.portal = {
     enable = true;
-    config.common.default = [ "gtk" ];
+    config.common.default = [ "hyprland" "gtk" ];
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
   };
@@ -111,28 +115,42 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
-    lm_sensors
-    kitty
+    android-tools
     floorp-bin
-    hyprland
     git
     home-manager
-    discord-canary
+    hyprland
+    kitty
+    qbittorrent
     legcord
+    arrpc
+    lm_sensors
     mgba
+    mpv
+    neovim
     r2modman
+    scrcpy # because waydroid (google auth) is being annoying
     wineWow64Packages.stable
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
+  programs.adb.enable = true;
 
   programs.steam.enable = true;
 
-  # waydroid
-  virtualisation.waydroid.enable = true;
-  virtualisation.waydroid.package = pkgs.waydroid-nftables;
-
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs = pkgs: with pkgs;[
+        cacert
+        nss
+        openssl
+        icu
+        libxcrypt-legacy
+      ];
+    };
+  };
   # environment.pathsToLink = [ "/share/fish" ];
 
   # Some programs need SUID wrappers, can be configured further or are

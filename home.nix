@@ -54,7 +54,7 @@
   };
 
 
-  services.arrpc.enable = true;
+  # services.arrpc.enable = true;
   programs.home-manager.enable = true;
   programs.vesktop.enable = true;
   # nixpkgs.config.allowUnfreePredicate = _: true;

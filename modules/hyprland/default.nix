@@ -26,6 +26,7 @@
         "$mod, W, killactive,"
         "$mod, V, togglefloating,"
         "$mod, F, fullscreen"
+        "$mod, P, pin" # TODO: red border when highlighted
 
         "$mod, left,  movefocus, l"
         "$mod, right, movefocus, r"
