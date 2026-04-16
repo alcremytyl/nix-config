@@ -103,6 +103,7 @@
       ui.colorizer.enable = true;
       ui.nvim-ufo.enable = true;
       utility.surround.enable = true;
+      utility.surround.useVendoredKeybinds.enable = false;
       utility.yazi-nvim.enable = true;
       visuals.indent-blankline.enable = true;
       visuals.nvim-web-devicons.enable = true;

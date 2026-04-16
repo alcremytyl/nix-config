@@ -15,32 +15,61 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, nvf, nix-flatpak, ... }:
-  let
-    system = "x86_64-linux";
-    # pkgs = nixpkgs.legacyPackages.${system};
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        useGlobalPkgs = true;
+    { nixpkgs, home-manager, ... }@inputs:
+    let 
+      system = "x86_64-linux";
+      mkHost = hostname: nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/${hostname}/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.sharedModules = [
+                inputs.nvf.homeManagerModules.default
+                inputs.nix-flatpak.homeManagerModules.nix-flatpak
+            ];
+
+            home-manager.users.mytyl = import ./home/${hostname}/home.nix;
+          }
+        ];
       };
+    in {
+      laptop = mkHost"laptop";
+      desktop = mkHost"desktop";
     };
-  in {
-    homeConfigurations."mytyl" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+  }
 
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
-      modules = [ 
-        nvf.homeManagerModules.default
-        nix-flatpak.homeManagerModules.nix-flatpak
 
-        ./home.nix 
-      ];
 
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
-    };
-  };
-}
+    #   let
+    #     system = "x86_64-linux";
+    #     # pkgs = nixpkgs.legacyPackages.${system};
+    #     pkgs = import nixpkgs {
+    #       inherit system;
+    #       config = {
+    #         allowUnfree = true;
+    #         useGlobalPkgs = true;
+    #       };
+    #     };
+    #   in {
+    #     homeConfigurations."mytyl" = home-manager.lib.homeManagerConfiguration {
+    #       inherit pkgs;
+    # 
+    #       # Specify your home configuration modules here, for example,
+    #       # the path to your home.nix.
+    #       modules = [ 
+    #         nvf.homeManagerModules.default
+    #         nix-flatpak.homeManagerModules.nix-flatpak
+    # 
+    #         ./home.nix 
+    #       ];
+    # 
+    #       # Optionally use extraSpecialArgs
+    #       # to pass through arguments to home.nix
+    #     };
+    #   };
+    # }

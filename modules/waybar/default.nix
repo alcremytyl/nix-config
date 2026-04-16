@@ -7,7 +7,7 @@
       reload_on_style_change = true;
       position = "top";
 
-      modules-left = ["clock" "tray" "temperature#cpu" "temperature#igpu" "temperature#dgpu"];
+      modules-left = ["clock" "tray" ];
       modules-center = ["hyprland/workspaces"];
       modules-right = ["group/expand" "network" "battery" "temperature" "pulseaudio"]; 
 

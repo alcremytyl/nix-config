@@ -14,7 +14,6 @@
     ./modules/nvf
     ./modules/rofi
     ./modules/tmux
-    ./modules/obs-studio
     ./modules/waybar
     ./modules/xdg
     ./modules/zoxide

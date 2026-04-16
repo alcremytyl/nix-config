@@ -7,7 +7,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      # NOTE: load host one instead
+      # /etc/nixos/hardware-configuration.nix
     ];
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -115,7 +116,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    android-tools
     floorp-bin
     git
     home-manager
@@ -124,19 +124,11 @@
     qbittorrent
     legcord
     arrpc
-    lm_sensors
-    mgba
     mpv
     neovim
-    r2modman
-    scrcpy # because waydroid (google auth) is being annoying
-    wineWow64Packages.stable
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
   ];
-  programs.adb.enable = true;
 
-  programs.steam.enable = true;
 
   programs.appimage = {
     enable = true;
