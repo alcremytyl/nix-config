@@ -1,4 +1,4 @@
-{ config, pkgs, inputs }: {
+{ config, pkgs, inputs, ... }@input: {
   imports = [
     ./hardware-configuration.nix
     ../../configuration.nix
@@ -14,5 +14,4 @@
   ];
 
   programs.steam.enable = true;
-  programs.adb.enable = true;
 }
