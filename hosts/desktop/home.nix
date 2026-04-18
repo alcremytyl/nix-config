@@ -1,24 +1,16 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, ... }:
+let 
+  base = import ../../modules/waybar/bar-base.nix;
+  overrides = {
+    modules-center = ["hyprland/workspaces"];
+    modules-right = ["group/expand" "network" "battery" "temperature" "pulseaudio"];
+    modules-left = ["clock" "tray" "temperature#cpu" "temperature#igpu" "temperature#dgpu"];
+  };
+in {
   imports = [
     ../../home.nix
-    ./modules/obs-studio
+    ../../modules/obs-studio
   ];
 
-  programs.waybar.settings = [{
-    modules-left = ["clock" "tray" "temperature#cpu" "temperature#igpu" "temperature#dgpu"];
-    "temperature#cpu" = {
-      hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
-      format = "CPU {temperatureC}°C";
-    };
-
-    "temperature#dgpu" = {
-      hwmon-path = "/sys/class/hwmon/hwmon4/temp1_input";
-      format = "GPU {temperatureC}°C";
-    };
-
-    "temperature#igpu" = {
-      hwmon-path = "/sys/class/hwmon/hwmon5/temp1_input";
-      format = "GPU {temperatureC}°C";
-    };
-  }];
+  programs.waybar.settings = [(base // overrides)];
 }
