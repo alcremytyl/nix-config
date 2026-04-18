@@ -5,9 +5,8 @@
     enable = true;
     style = builtins.readFile ./ellfouts.css;
 
-    /** NOTE: do this in the hosts
-      * _
-      * settings = import ./bar-base.nix // { HOST-IMPLS... }
+    /** NOTE: 
+      * settings are done in ./bar-base.nix and modules're set up per-host
     **/ 
   };
 }

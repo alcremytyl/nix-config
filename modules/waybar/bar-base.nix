@@ -68,21 +68,17 @@
   };
 
   "temperature#cpu" = {
-    hwmon-path = "/sys/class/hwmon/hwmon1";
-    input-filename = "temp1_input";
+    hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
     format = "CPU {temperatureC}°C";
   };
 
   "temperature#dgpu" = {
-    hwmon-path = "/sys/class/hwmon/hwmon4";
-    input-filename = "temp1_input";
-    format = "dGPU {temperatureC}°C";
+    hwmon-path = "/sys/class/hwmon/hwmon4/temp1_input";
+    format = "GPU {temperatureC}°C";
   };
 
   "temperature#igpu" = {
-    hwmon-path = "/sys/class/hwmon/hwmon5";
-    input-filename = "temp1_input";
-    format = "iGPU {temperatureC}°C";
+    hwmon-path = "/sys/class/hwmon/hwmon5/temp1_input";
+    format = "GPU {temperatureC}°C";
   };
-
 }
