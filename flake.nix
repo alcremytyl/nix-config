@@ -33,13 +33,15 @@
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
             ];
 
-            home-manager.users.mytyl = import ./home/${hostname}/home.nix;
+            home-manager.users.mytyl = import ./hosts/${hostname}/home.nix;
           }
         ];
       };
     in {
-      laptop = mkHost"laptop";
-      desktop = mkHost"desktop";
+      nixosConfigurations = {
+        laptop = mkHost"laptop";
+        desktop = mkHost"desktop";
+      };
     };
   }
 

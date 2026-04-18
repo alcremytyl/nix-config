@@ -102,8 +102,9 @@
       statusline.lualine.enable = true;
       ui.colorizer.enable = true;
       ui.nvim-ufo.enable = true;
+      # TODO: switch to a newer one
       utility.surround.enable = true;
-      utility.surround.useVendoredKeybinds.enable = false;
+      # utility.surround.useVendoredKeybinds.enable = false;
       utility.yazi-nvim.enable = true;
       visuals.indent-blankline.enable = true;
       visuals.nvim-web-devicons.enable = true;
