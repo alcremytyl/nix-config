@@ -9,7 +9,6 @@ let
 in {
   imports = [
     ../../home.nix
-    ../../modules/obs-studio
   ];
 
   programs.waybar.settings = [(base // overrides)];

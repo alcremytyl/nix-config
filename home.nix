@@ -12,6 +12,7 @@
     ./modules/hyprland
     ./modules/kitty
     ./modules/nvf
+    ./modules/obs-studio
     ./modules/rofi
     ./modules/tmux
     ./modules/waybar
