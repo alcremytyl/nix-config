@@ -1,7 +1,3 @@
-# TODO: 
-# desktop/laptop profiles
-# port new setup to laptop
-
 { config, pkgs, ... }:
 
 {
