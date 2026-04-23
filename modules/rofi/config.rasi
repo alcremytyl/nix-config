@@ -1,151 +1,50 @@
-/**
- * rofi -dump-theme output.
- * Rofi version: 2.0.0
- **/
 * {
-  base02:           rgba ( 255, 255, 73, 100 % );
-  base0C:           rgba ( 137, 221, 255, 100 % );
-  base05:           rgba ( 238, 255, 255, 100 % );
-  base0F:           rgba ( 255, 83, 112, 100 % );
-  base08:           rgba ( 240, 113, 120, 100 % );
-  base00:           rgba ( 38, 50, 56, 100 % );
-  base0A:           rgba ( 255, 203, 107, 100 % );
-  base03:           rgba ( 84, 110, 122, 100 % );
-  base0D:           rgba ( 130, 170, 255, 100 % );
-  base06:           rgba ( 238, 255, 255, 100 % );
-  base09:           rgba ( 247, 140, 108, 100 % );
-  base01:           rgba ( 46, 60, 67, 100 % );
-  base0B:           rgba ( 195, 232, 141, 100 % );
-  base04:           rgba ( 178, 204, 214, 100 % );
-  base0E:           rgba ( 199, 146, 234, 100 % );
-  base07:           White;
-  spacing:          0;
-  background-color: transparent;
-  
-  dark1: #282937;
-  dark2: #393F4E;
-  gray1: #868384;
-  gray2: #9B9A95; 
-  beige: #DCD6C4;
-  white: #ECF1EC;
-  bluer: #98C5E0;
-  purple: #382654;
-  background: rgba(24, 25, 38, 60%);
+}
 
-  niceassblue: rgba( 51, 204, 255, 90 % );
+configuration {
+  modes: [drun];
 }
+
 window {
-  transparency:     "real";
-  background-color: var(background);
-  border: 2px;
-  border-color: var(niceassblue);
-  border-radius:    10px;
+  height: 60%;
+  width:  60%;
+  transparency: "real";
+  background-color: rgba(0,0,0,30%);
+  border-color: #3cfe;
 }
-/** TODO: continue here, open wayland and waybar configs for reference **/
+
 mainbox {
-  padding:      30px 0px ;
-  border-color: var(niceassblue);
-  spacing:      30px ;
-  children:     [ "inputbar","message","listview" ];
 }
-inputbar {
-  padding:  0px 30px ;
-  children: [ "prompt","textbox-prompt-colon","entry","case-indicator" ];
+
+///
+prompt, entry {
+  text-color: white;
+  placeholder: "";
 }
-prompt {
-  text-color: var(bluer);
-}
-textbox-prompt-colon {
-  margin:     0px 1.0000ch 0px 0px ;
-  expand:     false;
-  str:        ":";
-  text-color: var(base0D);
-}
-entry {
-  text-color: var(base07);
-}
-case-indicator {
-  text-color: var(base0F);
-}
-mode-switcher {
-  border-color: var(base0D);
-  border:       1px 0px ;
-}
-message {
-  border-color: var(base0D);
-  border:       1px 0px ;
-}
-button {
-  padding:          5px ;
-  background-color: var(base03);
-  text-color:       var(base07);
-}
-button selected {
-  background-color: var(base0D);
-}
-textbox {
-  padding:          5px ;
-  background-color: var(base03);
-  text-color:       var(base07);
-}
+
 listview {
-  margin:    0px 10px 0px 30px ;
-  scrollbar: true;
+  //spacing: 0% 1%;
 }
-scrollbar {
-  background-color: var(base03);
-  margin:           0px 0px 0px 20px ;
-  handle-width:     10px ;
-  border-color:     var(base0D);
-  handle-color:     var(base0D);
-  border:           0px 1px ;
-}
+
+
 element {
-  padding:   5px ;
-  highlight: bold underline ;
-  spacing:   5px ;
-  children:  [ "element-icon","element-text" ];
+  orientation: horizontal;
+  children: [element-icon, element-text];
+  background-color: green;
+  padding: 0.5% 1%;
 }
-element normal {
-  background-color: transparent;
+
+listview {
+    background-color: none;
 }
-element normal.normal {
-  text-color: var(base07);
-}
-element normal.urgent {
-  text-color: var(base0F);
-}
-element normal.active {
-  text-color: var(base0B);
-}
-element selected {
-  background-color: var(base0D);
-}
-element selected.normal {
-  text-color: var(base07);
-}
-element selected.urgent {
-  text-color: var(base0F);
-}
-element selected.active {
-  text-color: var(base0B);
-}
+
+element normal.normal, 
 element alternate.normal {
-  text-color: var(base07);
+  background-color: none;
 }
-element alternate.urgent {
-  text-color: var(base0F);
+
+element.selected.normal {
+  background-color: red;
 }
-element alternate.active {
-  text-color: var(base0B);
-}
-element-text {
-  background-color: inherit;
-  foreground-color: inherit;
-  text-color:       inherit;
-}
-element-icon {
-  background-color: inherit;
-  foreground-color: inherit;
-  text-color:       inherit;
-}
+
+
