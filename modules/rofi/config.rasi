@@ -1,49 +1,85 @@
 * {
+  background-color: transparent;
+  spacing: 0;
+
+  
 }
 
 configuration {
-  modes: [drun];
+  mode: [ drun ];
 }
 
 window {
-  height: 60%;
-  width:  60%;
   transparency: "real";
   background-color: rgba(0,0,0,30%);
   border-color: #3cfe;
 }
 
 mainbox {
+  padding: 30px 0px;
+  spacing: 30px;
+  children: [ "inputbar", "listview" ];
 }
 
-///
-prompt, entry {
+inputbar {
+  padding: 0px 30px;
+  children: [ "prompt", "textbox-prompt-colon", "entry", "case-indicator" ];
+}
+
+prompt {
   text-color: white;
-  placeholder: "";
+}
+
+textbox-prompt-colon {
+  margin: 0px 1.0000ch  0px 0px;
+  expand: false;
+  str: ":";
+  text-color: white;
+}
+
+entry {
+  text-color: white;
+}
+
+case-indicator {
+  text-color: white;
+}
+
+textbox {
+  padding: 5px;
+  background-color: red;
+  text-color: white;
 }
 
 listview {
-  //spacing: 0% 1%;
+  margin: 0px 10px 0px 30px;
+  scrollbar: true;
 }
 
+scrollbar {
+  background-color: purple;
+  margin: 0px 0px 0px 20px;
+  handle-width: 10px;
+  handle-color: blue;
+  border-color: #3cf;
+  border: 0px 1px;
+}
 
 element {
-  orientation: horizontal;
-  children: [element-icon, element-text];
-  background-color: green;
-  padding: 0.5% 1%;
+  highlight: bold underline;
+  spacing: 5px;
+  children: [ "element-icon", "element-text" ];
 }
 
-listview {
-    background-color: none;
-}
-
+// NOTE: if something bad happens add *.urgent and active
 element normal.normal, 
 element alternate.normal {
+  text-color: white;
   background-color: none;
 }
 
 element.selected.normal {
+  text-color: white;
   background-color: red;
 }
 
