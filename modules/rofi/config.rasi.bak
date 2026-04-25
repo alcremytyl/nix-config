@@ -1,0 +1,51 @@
+* {
+}
+
+configuration {
+  modes: [drun];
+}
+
+window {
+  height: 60%;
+  width: 60%;
+  transparency: "real";
+  background-color: rgba(0,0,0,30%);
+  border-color: #3cfe;
+}
+
+mainbox {
+  margin: 3%;
+}
+
+///
+prompt, entry {
+  text-color: white;
+  placeholder: "";
+}
+
+listview {
+  //spacing: 0% 1%;
+}
+
+
+element {
+  orientation: horizontal;
+  children: [element-icon, element-text];
+  background-color: green;
+  padding: 0.75% 0%;
+}
+
+listview {
+    background-color: none;
+}
+
+element normal.normal, 
+element alternate.normal {
+  background-color: none;
+}
+
+element.selected.normal {
+  background-color: red;
+}
+
+

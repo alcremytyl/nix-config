@@ -14,11 +14,8 @@
       fish_command_not_found = ''
         echo "fish: Unknown command: $argv[1]"
       '';
-      nixos-refresh = ''
-        sudo nixos-rebuild switch --flake /etc/nixos#mytyl $argv
-      '';
-      home-refresh = ''
-        home-manager switch --flake /etc/nixos#.mytyl 
+      nix-next = ''
+        sudo nixos-rebuild $argv[1] --flake $HOME/.config/home-manager#$argv[2]
       '';
     };
   };

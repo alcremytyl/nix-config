@@ -8,7 +8,7 @@
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "kitty";
-      "$file_manager" = "lf";
+      "$file_manager" = "yazi";
       "$menu" = "rofi -show drun";
 
       exec-once = [
