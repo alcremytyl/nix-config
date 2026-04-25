@@ -1,7 +1,4 @@
 { ... }:
-  let
-    wallpaper = toString ./wallpaper.png;
-  in 
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -198,13 +195,14 @@
     };
   };
 
-  services.hyprpaper =  {
+  services.hyprpaper = 
+  let
+    wallpaper = toString ./wallpaper.png;
+    monitors = [ "HDMI-A-1" "HDMI-A-3" "DP-2" "eDP-1" ];
+  in {
     enable = true;
     settings = {
-      wallpaper = [
-        { monitor="eDP-1"; path=wallpaper; } 
-        { monitor="HDMI-A-3"; path=wallpaper; }
-      ];
+      wallpaper = map(monitor: { monitor=monitor; path=wallpaper; }) monitors;
     };
   };
 
