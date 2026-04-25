@@ -10,8 +10,9 @@
     mgba
     r2modman
     wineWow64Packages.stable
-    scrcpy # because waydroid (google auth) is being annoying
+    scrcpy # because waydroid sucks to set up
   ];
+
 
   programs.steam.enable = true;
 }

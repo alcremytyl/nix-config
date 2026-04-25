@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ lib, ... }:
 let 
   base = import ../../modules/waybar/bar-base.nix;
   overrides = {
@@ -12,4 +12,9 @@ in {
   ];
 
   programs.waybar.settings = [(base // overrides)];
+
+  wayland.windowManager.hyprland.settings.monitor = lib.mkForce [
+    "DP-2, 2560x1440@240, 0x0, 1"
+    "HDMI-A-1, 1920x1080@60, 2560x0, 1.5"
+  ];
 }
