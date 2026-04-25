@@ -95,10 +95,10 @@
         "HYPRCURSOR_SIZE,24"
       ];
 
-      monitor = [
-        "eDP-1,preferred,auto,auto" 
-        "HDMI-A-1,preferred,auto,auto,mirror,eDP-1"
-      ];
+      # monitor = [
+      #   "eDP-1,preferred,auto,auto" 
+      #   "HDMI-A-1,preferred,auto,auto,mirror,eDP-1"
+      # ];
 
 
       general = {
