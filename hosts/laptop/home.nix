@@ -12,4 +12,8 @@ in {
   ];
 
   programs.waybar.settings = [(base // overrides)];
+  wayland.windowManager.hyprland.settings.monitor = [
+      "eDP-1,preferred,auto,auto" 
+      "HDMI-A-1,preferred,auto,auto,mirror,eDP-1"
+  ];
 }
