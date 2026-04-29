@@ -76,6 +76,7 @@
   hardware.uinput.enable = true;
   boot.kernelModules = [ "uinput" ];
 
+  # bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -94,7 +95,26 @@
     alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
+    # probably don't need this, USB dongle Just Works:tm:
+    # extraConfig = {
+    #   pipewire."92-low-latency" = {
+    #     "context.properties" = {
+    #       "default.clock.rate" = 48000;
+    #       "default.clock.quantum" = 128;
+    #       "default.clock.min-quantum" = 32;
+    #       "default.clock.max-quantum" = 128;
+    #     };
+    #   };
+
+    #   pipewire-pulse."92-latency" = {
+    #     "pulse.default.req" = "64/48000";
+    #     "pulse.min.req" = "32/48000";
+    #     "pulse.max.req" = "128/48000";
+    #   };
+    # };
   };
+
+
 
   services.flatpak.enable = true;
 
@@ -127,9 +147,12 @@
     floorp-bin
     git
     home-manager
+    discord-canary
     hyprland
     kitty
     qbittorrent
+    pipewire
+    pulseaudio
     legcord
     arrpc
     mpv

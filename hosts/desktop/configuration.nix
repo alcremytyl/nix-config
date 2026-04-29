@@ -13,6 +13,6 @@
     scrcpy # because waydroid sucks to set up
   ];
 
-
+  hardware.xpadneo.enable = true;
   programs.steam.enable = true;
 }
