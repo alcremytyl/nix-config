@@ -2,6 +2,8 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    # default is "hyprlang" on this home version
+    configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "kitty";
@@ -198,7 +200,7 @@
   services.hyprpaper = 
   let
     wallpaper = toString ./wallpaper.png;
-    monitors = [ "HDMI-A-1" "HDMI-A-3" "DP-2" "eDP-1" ];
+    monitors = [ "HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "DP-1" "DP-2" "eDP-1" ];
   in {
     enable = true;
     settings = {

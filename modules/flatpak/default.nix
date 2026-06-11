@@ -5,6 +5,7 @@
       "org.vinegarhq.Sober"
       "com.parsecgaming.parsec"
       "it.mijorus.gearlever"
+      # "org.prismlauncher.PrismLauncher"
     ];
   };
 }

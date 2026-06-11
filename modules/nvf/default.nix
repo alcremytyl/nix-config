@@ -41,7 +41,8 @@
         rust.enable = true;
         # [wait until fixed](https://github.com/NotAShelf/nvf/issues/920)
         sql.enable = true;
-        ts.enable = true;
+        # ts.enable = true;
+        typescript.enable = true;
       };
 
       # keymaps =  import ./keybinds.nix;

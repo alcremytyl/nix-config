@@ -95,23 +95,6 @@
     alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
-    # probably don't need this, USB dongle Just Works:tm:
-    # extraConfig = {
-    #   pipewire."92-low-latency" = {
-    #     "context.properties" = {
-    #       "default.clock.rate" = 48000;
-    #       "default.clock.quantum" = 128;
-    #       "default.clock.min-quantum" = 32;
-    #       "default.clock.max-quantum" = 128;
-    #     };
-    #   };
-
-    #   pipewire-pulse."92-latency" = {
-    #     "pulse.default.req" = "64/48000";
-    #     "pulse.min.req" = "32/48000";
-    #     "pulse.max.req" = "128/48000";
-    #   };
-    # };
   };
 
 
@@ -131,6 +114,7 @@
   users.users.mytyl = {
     isNormalUser = true;
     description = "mytyl";
+    shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" ];
     # packages = with pkgs; [];
   };
@@ -144,6 +128,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     brightnessctl
+    devenv
     floorp-bin
     git
     home-manager
@@ -160,7 +145,13 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   ];
 
+  environment.variables = {
+    DRI_PRIME = "pci-0000:03:00.0"; # lowkey does nothing
+    SHELL = "${pkgs.fish}/bin/fish";
+  };
 
+
+  programs.fish.enable = true;
   programs.appimage = {
     enable = true;
     binfmt = true;
