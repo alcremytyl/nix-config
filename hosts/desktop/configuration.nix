@@ -11,12 +11,14 @@
     easyeffects
     deepfilternet
 
-    # protonvpn-gui
     proton-vpn
 
     r2modman
     wineWow64Packages.stable
+
+    azahar
     mgba
+
     scrcpy # because waydroid sucks to set up
 
     prismlauncher

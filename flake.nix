@@ -42,5 +42,8 @@
         laptop = mkHost"laptop";
         desktop = mkHost"desktop";
       };
+      templates = {
+        rust = { path = ./rust; };
+      };
     };
   }
