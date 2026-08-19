@@ -105,6 +105,7 @@
       ui.nvim-ufo.enable = true;
       mini.surround.enable = true;
       utility.yazi-nvim.enable = true;
+      utility.leetcode-nvim.enable = true;
       visuals.indent-blankline.enable = true;
       visuals.nvim-web-devicons.enable = true;
     };
