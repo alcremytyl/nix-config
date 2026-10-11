@@ -12,14 +12,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    dw-proton.url = "github:imaviso/dwproton-flake";
   };
 
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     let 
       system = "x86_64-linux";
-      mkHost = hostname: nixpkgs.lib.nixosSystem {
+      mkHost = hostname: extraArgs: nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs; } // extraArgs;
         modules = [
           ./hosts/${hostname}/configuration.nix
 
@@ -27,7 +29,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.extraSpecialArgs = {inherit inputs;} // extraArgs;
             home-manager.sharedModules = [
                 inputs.nvf.homeManagerModules.default
                 inputs.nix-flatpak.homeManagerModules.nix-flatpak
@@ -39,8 +41,10 @@
       };
     in {
       nixosConfigurations = {
-        laptop = mkHost"laptop";
-        desktop = mkHost"desktop";
+        laptop = mkHost"laptop"{};
+        desktop = mkHost"desktop"{
+          inherit (inputs) dw-proton;
+        };
       };
       templates = {
         rust = { path = ./rust; };

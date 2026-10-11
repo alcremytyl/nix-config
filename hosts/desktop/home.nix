@@ -32,6 +32,7 @@ in {
     # DP-2 middle-right
     monitor = lib.mkForce [
       "HDMI-A-1, 1920x1080@74.97, 0x0, 1"
+      "HDMI-A-2, 1920x1080@60, 1920x1440, 1, transform, 6"
       "DP-1, 2560x1440@300, 1920x0, 1"
     ];
     workspace = [
@@ -45,7 +46,7 @@ in {
       "7, monitor:HDMI-A-1"
       "8, monitor:HDMI-A-1"
       "9, monitor:HDMI-A-1"
-      "10,monitor:HDMI-A-1"
+      "10,monitor:HDMI-A-2" # drawing tablet
     ];
   };
 
