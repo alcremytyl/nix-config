@@ -20,6 +20,7 @@
     mgba
 
     scrcpy # because waydroid sucks to set up
+    thunar
 
     prismlauncher
     temurin-bin-21 # java 21
@@ -27,7 +28,13 @@
 
 
   hardware.xpadneo.enable = true;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = [
+      inputs.dw-proton.packages.${pkgs.stdenv.hostPlatform.system}.dw-proton
+     pkgs.proton-ge-bin 
+    ];
+  };
 
   programs.dconf.enable = true;   # for EasyEffects
 
