@@ -1,118 +1,126 @@
-{ ... }:
-{
+{ lib, ... }:
+let 
+  inherit (lib.generators) mkLuaInline;
+  mod = "SUPER";
+  terminal = "kitty";
+  file_manager = "thunar";
+  menu = "rofi -show drun"; # TODO: check out hyprlauncher
+  screenshot = "hyprshot -m";
+
+  bind' = key: value: opts: {
+    _args = [key value] ++ lib.optional(opts != {}) opts; 
+  } ;
+in {
   wayland.windowManager.hyprland = {
     enable = true;
-    # default is "hyprlang" on this home version
-    configType = "hyprlang";
+    # https://mynixos.com/home-manager/option/wayland.windowManager.hyprland.settings
+    # forced to use lua ver in hypr 0.57
+    configType = "lua";
     settings = {
-      "$mod" = "SUPER";
-      "$terminal" = "kitty";
-      "$file_manager" = "yazi";
-      "$menu" = "rofi -show drun";
 
-      exec-once = [
-        "waybar"
+      # startup processes
+      on._args = [
+        "hyprland.start"
+        (mkLuaInline '' function()
+          hl.exec_cmd("waybar")
+        end '')
       ];
 
-      # https://wiki.hypr.land/Configuring/Binds/
       bind = [
-        "$mod, SPACE, exec, $terminal"
-        "$mod, RETURN, exec, $menu"
-        "$mod, E, exec, $file_manager"
-        "$mod, S, exec,       hyprshot -m region -o $HOME/Pictures/Screenshots/"
-        "$mod SHIFT, S, exec, hyprshot -m output -o $HOME/Pictures/Screenshots/"
+        (bind' "${mod} + SPACE"     (mkLuaInline ''hl.dsp.exec_cmd("${terminal}")'') {})
+        (bind' "${mod} + RETURN"    (mkLuaInline ''hl.dsp.exec_cmd("${menu}")'') {})
+        (bind' "${mod} + E"         (mkLuaInline ''hl.dsp.exec_cmd("${file_manager}")'') {})
+        (bind' "${mod} + S"         (mkLuaInline ''hl.dsp.exec_cmd("${screenshot} region -o $HOME/Pictures/Screenshots/")'') {})
+        (bind' "${mod} + SHIFT + S" (mkLuaInline ''hl.dsp.exec_cmd("${screenshot} output -o $HOME/Pictures/Screenshots/")'') {})
 
-        "$mod, W, killactive,"
-        "$mod, V, togglefloating,"
-        "$mod, F, fullscreen"
-        "$mod, P, pin" # TODO: red border when highlighted
 
-        "$mod, left,  movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up,    movefocus, u"
-        "$mod, down,  movefocus, d"
+        # swap to next and put to top
+        (bind' "${mod} + TAB" (mkLuaInline '' function()
+          hl.dispatch(hl.dsp.window.cycle_next())
+          hl.dispatch(hl.dsp.window.alter_zorder({ mode = "top" }))
+        end '') {})
 
-        "$mod CTRL, left,  swapwindow, l"
-        "$mod CTRL, right, swapwindow, r"
-        "$mod CTRL, up,    swapwindow, u"
-        "$mod CTRL, down,  swapwindow, d"
+        (bind' "${mod} + W" (mkLuaInline ''hl.dsp.window.close()'') {})
+        (bind' "${mod} + V" (mkLuaInline ''hl.dsp.window.float({ action = "toggle" })'') {})
+        (bind' "${mod} + F" (mkLuaInline ''hl.dsp.window.fullscreen({ action = "toggle" })'') {})
+        (bind' "${mod} + P" (mkLuaInline ''hl.dsp.window.pin({ action = "toggle" })'') {}) # TODO: red border when highlighted
 
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-        "$mod, 0, workspace, 10"
+        (bind' "${mod} + LEFT"  (mkLuaInline ''hl.dsp.focus({ direction = "left" })'') {})
+        (bind' "${mod} + RIGHT" (mkLuaInline ''hl.dsp.focus({ direction = "right" })'') {})
+        (bind' "${mod} + UP"    (mkLuaInline ''hl.dsp.focus({ direction = "up" })'') {})
+        (bind' "${mod} + DOWN"  (mkLuaInline ''hl.dsp.focus({ direction = "down" })'') {})
 
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspace, 10"
-      ];
+        (bind' "${mod} + CTRL + LEFT"   (mkLuaInline ''hl.dsp.window.swap({ direction = "left" })'') {})
+        (bind' "${mod} + CTRL + RIGHT"  (mkLuaInline ''hl.dsp.window.swap({ direction = "right" })'') {})
+        (bind' "${mod} + CTRL + UP"     (mkLuaInline ''hl.dsp.window.swap({ direction = "up" })'') {})
+        (bind' "${mod} + CTRL + DOWN"   (mkLuaInline ''hl.dsp.window.swap({ direction = "down" })'') {})
 
-      binde = [
-        "$mod ALT, LEFT, resizeactive, -50 0"
-        "$mod ALT, RIGHT, resizeactive, 50 0"
-        "$mod ALT, UP, resizeactive, 0 -50"
-        "$mod ALT, DOWN, resizeactive, 0 50"
-      ];
+        (bind' "${mod} + 1" (mkLuaInline ''hl.dsp.focus({ workspace = 1 })'') {})
+        (bind' "${mod} + 2" (mkLuaInline ''hl.dsp.focus({ workspace = 2 })'') {})
+        (bind' "${mod} + 3" (mkLuaInline ''hl.dsp.focus({ workspace = 3 })'') {})
+        (bind' "${mod} + 4" (mkLuaInline ''hl.dsp.focus({ workspace = 4 })'') {})
+        (bind' "${mod} + 5" (mkLuaInline ''hl.dsp.focus({ workspace = 5 })'') {})
+        (bind' "${mod} + 6" (mkLuaInline ''hl.dsp.focus({ workspace = 6 })'') {})
+        (bind' "${mod} + 7" (mkLuaInline ''hl.dsp.focus({ workspace = 7 })'') {})
+        (bind' "${mod} + 8" (mkLuaInline ''hl.dsp.focus({ workspace = 8 })'') {})
+        (bind' "${mod} + 9" (mkLuaInline ''hl.dsp.focus({ workspace = 9 })'') {})
+        (bind' "${mod} + 0" (mkLuaInline ''hl.dsp.focus({ workspace = 10 })'') {})
 
-      bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute,	      exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioMicMute,	    exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        (bind' "${mod} + SHIFT + 1" (mkLuaInline ''hl.dsp.window.move({ workspace = 1, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 2" (mkLuaInline ''hl.dsp.window.move({ workspace = 2, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 3" (mkLuaInline ''hl.dsp.window.move({ workspace = 3, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 4" (mkLuaInline ''hl.dsp.window.move({ workspace = 4, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 5" (mkLuaInline ''hl.dsp.window.move({ workspace = 5, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 6" (mkLuaInline ''hl.dsp.window.move({ workspace = 6, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 7" (mkLuaInline ''hl.dsp.window.move({ workspace = 7, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 8" (mkLuaInline ''hl.dsp.window.move({ workspace = 8, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 9" (mkLuaInline ''hl.dsp.window.move({ workspace = 9, follow = true })'') {})
+        (bind' "${mod} + SHIFT + 0" (mkLuaInline ''hl.dsp.window.move({ workspace = 0, follow = true })'') {})
 
-        ",XF86MonBrightnessUp,   exec, brightnessctl -e -n2 set 5%+"
-        ",XF86MonBrightnessDown, exec, brightnessctl -e -n2 set 5%-"
-      ];
+        (bind' "${mod} + mouse:272" (mkLuaInline ''hl.dsp.window.drag()'') { mouse = true; })
+        (bind' "${mod} + mouse:273" (mkLuaInline ''hl.dsp.window.resize()'') { mouse = true; })
 
-      bindl = [
-        ", XF86AudioNext,  exec, playerctl next"
-        ", XF86AudioPause, exec, playerctl play-pause"
-        ", XF86AudioPlay,  exec, playerctl play-pause"
-        ", XF86AudioPrev,  exec, playerctl previous"
-      ];
+        (bind' "${mod} + ALT + LEFT"  (mkLuaInline ''hl.dsp.window.resize({ x = -50, y = 0,   relative = true;})'') { repeating = true; })
+        (bind' "${mod} + ALT + RIGHT" (mkLuaInline ''hl.dsp.window.resize({ x = 50,  y = 0,   relative = true;})'') { repeating = true; })
+        (bind' "${mod} + ALT + UP"    (mkLuaInline ''hl.dsp.window.resize({ x = 0,   y = -50, relative = true;})'') { repeating = true; })
+        (bind' "${mod} + ALT + DOWN"  (mkLuaInline ''hl.dsp.window.resize({ x = 0,   y = 50,  relative = true;})'') { repeating = true; })
 
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
+        (bind' "XF86AudioRaiseVolume" (mkLuaInline ''hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+")'') { locked = true; repeating = true; })
+        (bind' "XF86AudioLowerVolume" (mkLuaInline ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')      { locked = true; repeating = true; })
+        (bind' "XF86AudioMute"	      (mkLuaInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')     { locked = true; repeating = true; })
+        (bind' "XF86AudioMicMute"	    (mkLuaInline ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle")'')   { locked = true; repeating = true; })
+
+        (bind' "XF86MonBrightnessUp"   (mkLuaInline  ''hl.dsp.exec_cmd("brightnessctl -e -n2 set 5%+")'') { locked = true; repeating = true; })
+        (bind' "XF86MonBrightnessDown" (mkLuaInline ''hl.dsp.exec_cmd("brightnessctl -e -n2 set 5%-")'')  { locked = true; repeating = true; })
+
+        (bind' "XF86AudioNext"  (mkLuaInline ''hl.dsp.exec_cmd("playerctl next")'')       { locked = true; })
+        (bind' "XF86AudioPause" (mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'') { locked = true; })
+        (bind' "XF86AudioPlay"  (mkLuaInline ''hl.dsp.exec_cmd("playerctl play-pause")'') { locked = true; })
+        (bind' "XF86AudioPrev"  (mkLuaInline ''hl.dsp.exec_cmd("playerctl previous")'')   { locked = true; })
       ];
 
       env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
+        (bind' "XCURSOR_SIZE" 24 {})
+        (bind' "HYPRCURSOR_SIZE" 24 {})
       ];
 
-      # monitor = [
-      #   "eDP-1,preferred,auto,auto" 
-      #   "HDMI-A-1,preferred,auto,auto,mirror,eDP-1"
-      # ];
 
-
-      general = {
+      config.general = {
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
         resize_on_border = true;
         allow_tearing = false;
-        layout = "master";
+        layout = "dwindle";
 
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        col.active_border = { colors = ["rgba(33ccffee)" "rgba(00ff99ee)"]; angle = 45; };
+        col.inactive_border = "rgba(595959aa)";
       };
 
-      decoration = {
+      config.animations.enabled = true;
+
+      config.decoration = {
+
         rounding = 10;
         rounding_power = 2;
 
@@ -134,52 +142,12 @@
         };
       };
 
-      animations = {
-        enabled = "yes, please :)";
-        bezier = [
-          "easeOutQuint,    0.23, 1,    0.32, 1"
-          "easeInOutCubic,  0.65, 0.05, 0.75, 1"
-          "linear,	    0,    0,    1,    1"
-          "almostLinear,    0.5,  0.5,  0.75, 1"
-          "quick,	    0.15, 0,    0.1,  1"
-        ];
-
-        animation = [
-          "global,	  1, 10,   default"
-          "border,	  1, 5.39, easeOutQuint"
-          "windows,	  1, 4.79, easeOutQuint"
-          "windowsIn,	  1, 4.1,  easeOutQuint, popin 87%"
-          "windowsOut,    1, 1.46, linear,       popin 87%"	
-          "fade,    	  1, 3.03, quick"
-          "fadeIn, 	  1, 1.73, almostLinear"
-          "fadeOut,	  1, 1.46, almostLinear"
-          "layers,        1, 3.81, easeOutQuint"
-          "layersIn,      1, 4,    easeOutQuint, fade"
-          "layersOut,     1, 1.5,  linear, fade"
-          "fadeLayersIn,  1, 1.79, almostLinear"
-          "fadeLayersOut, 1, 1.39, almostLinear"
-          "workspaces,    1, 1.94, almostLinear, fade"
-          "workspacesIn,  1, 1.21, almostLinear, fade"
-          "workspacesOut, 1, 1.94, almostLinear, fade"
-          # "zoomFactor, 	  1, 7,    quick"
-        ];
-      };
-
-      dwindle = {
-        # pseudotile = true;
-        preserve_split = true;
-      };
-
-      master = {
-        new_status = "master";
-      };
-
-      misc = {
+      config.misc = {
         force_default_wallpaper = -1;
         disable_hyprland_logo = false;
       };
 
-      input = {
+      config.input = {
         kb_layout = "us";
         kb_variant = "";
         kb_model = "";
@@ -190,9 +158,7 @@
 
         sensitivity = 0;
 
-        touchpad = {
-          natural_scroll = true;
-        };
+        touchpad.natural_scroll = true;
       };
     };
   };

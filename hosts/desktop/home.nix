@@ -6,6 +6,8 @@ let
     modules-right = ["group/expand" "network" "battery" "temperature" "pulseaudio"];
     modules-left = ["clock" "tray" "temperature#cpu" "temperature#igpu" "temperature#dgpu"];
   };
+  inherit (lib.generators) mkLuaInline;
+
 in {
   imports = [
     ../../home.nix
@@ -31,22 +33,24 @@ in {
     # DP-1 rightmost
     # DP-2 middle-right
     monitor = lib.mkForce [
-      "HDMI-A-1, 1920x1080@74.97, 0x0, 1"
-      "HDMI-A-2, 1920x1080@60, 1920x1440, 1"
-      "DP-1, 2560x1440@300, 1920x0, 1"
+      { scale = 1; output = "HDMI-A-1"; mode = "1920x1080@74.97"; position = "0x0"; }
+      { scale = 1; output = "HDMI-A-2"; mode = "1920x1080@60";    position = "1920x1440"; }
+      { scale = 1; output = "DP-1";     mode = "2560x1440@300";   position = "1920x0"; }
     ];
-    workspace = [
-      "1,monitor:DP-1,default:true"
-      "2,monitor:DP-1"
-      "3,monitor:DP-1"
-      "4,monitor:DP-1"
-      "5,monitor:DP-1"
 
-      "6, monitor:HDMI-A-1,default:true"
-      "7, monitor:HDMI-A-1"
-      "8, monitor:HDMI-A-1"
-      "9, monitor:HDMI-A-1"
-      "10,monitor:HDMI-A-2" # drawing tablet
+    workspace_rule = [
+      { workspace = 1; monitor = "DP-1"; default = true; }
+      { workspace = 2; monitor = "DP-1"; }
+      { workspace = 3; monitor = "DP-1"; }
+      { workspace = 4; monitor = "DP-1"; }
+      { workspace = 5; monitor = "DP-1"; }
+
+      { workspace = 6; monitor = "HDMI-A-1"; default = true; }
+      { workspace = 7; monitor = "HDMI-A-1"; }
+      { workspace = 8; monitor = "HDMI-A-1"; }
+      { workspace = 9; monitor = "HDMI-A-1"; }
+
+      { workspace = 10; monitor = "HDMI-A-2"; default = true;} # drawing tablet
     ];
   };
 
